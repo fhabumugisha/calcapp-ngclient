@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span><a routerLink="/" target="_blank">Calcapp.io</a></span>
+    <span class="spacer"></span>
+
+    <a mat-button routerLink="projects" routerLinkActive="active" *ngIf="isAuthenticated">Projects</a>
+    <a mat-button routerLink="login" routerLinkActive="active" *ngIf="!isAuthenticated">Log in</a>
+    <a *ngIf="!isAuthenticated" mat-button mat-raised-button routerLink="signup" routerLinkActive="active">Register</a>
+    <a *ngIf="isAuthenticated" mat-button mat-raised-button (click)="onLogout()" routerLinkActive="active">Logout</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+

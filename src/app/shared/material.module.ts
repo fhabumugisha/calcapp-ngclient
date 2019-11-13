@@ -39,7 +39,8 @@ import {MatSidenavModule,
       MatChipsModule,
       MatTooltipModule,
       MatTableModule,
-      MatPaginatorModule
+      MatPaginatorModule,
+      MatSidenavModule
   ],
   exports: [
     MatButtonModule,
@@ -57,7 +58,8 @@ import {MatSidenavModule,
       MatChipsModule,
       MatTooltipModule,
       MatTableModule,
-      MatPaginatorModule
+      MatPaginatorModule,
+      MatSidenavModule
   ]
 })
 export class MaterialModule { }

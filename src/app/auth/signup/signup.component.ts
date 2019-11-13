@@ -21,10 +21,18 @@ export class SignupComponent implements OnInit {
     if (!signupForm.valid) {
       return;
     }
+
     const email =  signupForm.value.email;
     const password = signupForm.value.password;
     const confirmPassword = signupForm.value.confirmPassword;
-    this.authService.signup(email, password, confirmPassword);
+    this.authService.signup(email, password, confirmPassword).subscribe(
+      (data) => {
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 }
