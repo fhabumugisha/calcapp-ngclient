@@ -12,4 +12,8 @@ export class ProjectCreateComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  onSubmit(){
+
+  }
 }
