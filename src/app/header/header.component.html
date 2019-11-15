@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span><a routerLink="/" target="_blank">Calcapp.io</a></span>
     <span class="spacer"></span>
@@ -8,6 +8,32 @@
     <a *ngIf="!isAuthenticated" mat-button mat-raised-button routerLink="signup" routerLinkActive="active">Register</a>
     <a *ngIf="isAuthenticated" mat-button mat-raised-button (click)="onLogout()" routerLinkActive="active">Logout</a>
   </mat-toolbar-row>
-</mat-toolbar>
+</mat-toolbar> -->
+
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #563d7c;">
+  <a class="navbar-brand" routerLink="/">Calcapp.io</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="projects" routerLinkActive="active" *ngIf="isAuthenticated">Projects <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="login" routerLinkActive="active" *ngIf="!isAuthenticated">Log in</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="signup" routerLinkActive="active" *ngIf="!isAuthenticated">Sign up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="onLogout()" routerLinkActive="active" *ngIf="isAuthenticated">Sign out</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
 
 
