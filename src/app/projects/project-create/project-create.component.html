@@ -1,0 +1,21 @@
+<div class="card mx-auto" style="width: 26rem;">
+    <div class="card-header">
+      Log in
+    </div>
+    <div class="card-body">
+      <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="example-form">
+
+          <mat-form-field >
+            <input matInput placeholder="Email" name="email" ngModel email required>
+          </mat-form-field>
+
+          <mat-form-field >
+            <input matInput placeholder="Password" name="password" ngModel required minlength="5" type="password">
+          </mat-form-field>
+          <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
+          type="submit" [disabled]="!loginForm.valid">Log in</button>
+
+      </form>
+    </div>
+
+  </div>

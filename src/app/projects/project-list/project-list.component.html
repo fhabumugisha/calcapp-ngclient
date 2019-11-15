@@ -1,1 +1,25 @@
-<p>project-list works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <ng-container *ngIf="projects.length > 0; else noProjects">
+
+
+        </ng-container>
+
+      <ng-template #noProjects>
+
+        <div class="card text-center">
+
+            <div class="card-body">
+              <h5 class="card-title">You haven't yet any project.</h5>
+              <p class="card-text">Your projects will be displaeyd here.</p>
+              <a href="#" class="btn btn-primary" routerLink="new" routerLinkActive="active">Add new project</a>
+
+            </div>
+
+          </div>
+
+      </ng-template>
+    </div>
+  </div>
+</div>
