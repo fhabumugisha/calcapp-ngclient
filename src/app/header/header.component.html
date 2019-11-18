@@ -21,10 +21,10 @@
         <a class="nav-link" routerLink="projects" routerLinkActive="active" *ngIf="isAuthenticated">Projects <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="login" routerLinkActive="active" *ngIf="!isAuthenticated">Log in</a>
+        <a class="nav-link" routerLink="auth/login" routerLinkActive="active" *ngIf="!isAuthenticated">Log in</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="signup" routerLinkActive="active" *ngIf="!isAuthenticated">Sign up</a>
+        <a class="nav-link" routerLink="auth/signup" routerLinkActive="active" *ngIf="!isAuthenticated">Sign up</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="onLogout()" routerLinkActive="active" *ngIf="isAuthenticated">Sign out</a>

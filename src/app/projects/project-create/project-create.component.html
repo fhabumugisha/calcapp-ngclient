@@ -1,19 +1,29 @@
 <div class="card mx-auto" style="width: 26rem;">
     <div class="card-header">
-      Log in
+      New project
     </div>
     <div class="card-body">
-      <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="example-form">
+      <form  #createProjectForm="ngForm" (ngSubmit)="onSubmit(createProjectForm)" class="example-form">
 
           <mat-form-field >
-            <input matInput placeholder="Email" name="email" ngModel email required>
+            <input matInput placeholder="Title" name="title" ngModel  required>
           </mat-form-field>
 
           <mat-form-field >
-            <input matInput placeholder="Password" name="password" ngModel required minlength="5" type="password">
+              <mat-label>Type</mat-label>
+              <mat-select name="type" ngModel>
+                <mat-option *ngFor="let type of projectTypes" [value]="type.code">
+                  {{type.label}}
+                </mat-option>
+              </mat-select>
           </mat-form-field>
+
+          <mat-form-field >
+              <textarea matInput placeholder="Description" name="description" ngModel ></textarea>
+            </mat-form-field>
+
           <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
-          type="submit" [disabled]="!loginForm.valid">Log in</button>
+          type="submit" [disabled]="!createProjectForm.valid">Save</button>
 
       </form>
     </div>
