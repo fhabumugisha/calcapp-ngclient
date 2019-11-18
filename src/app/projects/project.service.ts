@@ -2,13 +2,14 @@ import { Project } from './project.model';
 import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { map,catchError, tap } from "rxjs/operators";
+import { map, catchError, tap } from "rxjs/operators";
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectService {
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -50,6 +51,17 @@ export class ProjectService {
       catchError(this.handleError),
       tap(data =>  console.log(data))
     );
+  }
+
+  getProject(projectId: string){
+
+    return this.http
+    .get<{ message: string, project: any }>("http://localhost:3000/projects/" + projectId )
+    .pipe(
+      catchError(this.handleError),
+      map(data => {
+        return {...data.project, id: data.project._id.toString()} ;
+      }));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

@@ -3,6 +3,7 @@ import { ProjectService } from "./../project.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Project } from "src/app/projects/project.model";
 import { Subscription } from "rxjs";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-project-list",
@@ -14,7 +15,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   projects: Project[] = [];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.projectService.getProjects().subscribe((projects: Project[]) => {
@@ -29,6 +32,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   onEdit(projectId: string) {
     console.log(projectId);
+    this.router.navigate(['/projects', projectId], {relativeTo : this.route});
   }
   onDelete(projectId: string) {
     this.projectService.deleteProject(projectId).subscribe(result => {

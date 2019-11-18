@@ -31,7 +31,6 @@ export class ProjectCreateComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("ProjectCreateComponent");
 
   }
 

@@ -1,0 +1,31 @@
+<div class="card mx-auto example-container" >
+  <div class="card-header">
+    Edit project
+  </div>
+  <div class="card-body">
+    <form  #editProjectForm="ngForm" (ngSubmit)="onSubmit(editProjectForm)" class="example-form">
+
+        <mat-form-field >
+          <input matInput placeholder="Title" name="title" ngModel  required>
+        </mat-form-field>
+
+        <mat-form-field >
+            <mat-label>Type</mat-label>
+            <mat-select name="type" ngModel>
+              <mat-option *ngFor="let type of projectTypes" [value]="type.code">
+                {{type.label}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field >
+            <textarea matInput placeholder="Description" name="description" ngModel ></textarea>
+          </mat-form-field>
+
+        <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
+        type="submit" [disabled]="!editProjectForm.valid">Save</button>
+
+    </form>
+  </div>
+
+</div>
