@@ -1,5 +1,19 @@
-.example-container {
+/* .example-container {
   display: flex;
   flex-direction: column;
-  max-width: 26rem;
+  max-width: 30rem;
+} */
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+
+.mat-expansion-panel-body {
+  padding: 7px 7px 6px 8px !important;
 }

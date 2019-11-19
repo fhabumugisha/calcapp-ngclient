@@ -17,7 +17,8 @@ import {MatSidenavModule,
   MatChipsModule,
   MatTooltipModule,
   MatTableModule,
-  MatPaginatorModule} from '@angular/material';
+  MatPaginatorModule,
+  MatExpansionModule} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -59,7 +60,8 @@ import {MatSidenavModule,
       MatTooltipModule,
       MatTableModule,
       MatPaginatorModule,
-      MatSidenavModule
+      MatSidenavModule,
+      MatExpansionModule,
   ]
 })
 export class MaterialModule { }

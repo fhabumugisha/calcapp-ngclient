@@ -8,15 +8,13 @@
                       <a mat-raised-button color="accent" routerLink="new" >
                           <mat-icon>add</mat-icon>
                         New project</a>
-
                     </div>
-
               </div>
             </div>
             <hr>
             <div class="card-deck">
 
-                <div class="card" style="width: 18rem;" *ngFor="let project of projects">
+                <div class="card" style="width: 16rem;" *ngFor="let project of projects">
                     <div class="card-body">
                       <h5 class="card-title">   {{project.title}}</h5>
                       <h6 class="card-subtitle mb-2 text-muted"> {{project.type}}</h6>

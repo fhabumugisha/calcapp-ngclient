@@ -36,7 +36,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
   onDelete(projectId: string) {
     this.projectService.deleteProject(projectId).subscribe(result => {
-      this.projects = this.projects.filter(p => p.id !== projectId);
+      this.projects = this.projects.filter(p => p._id !== projectId);
     });
   }
   ngOnDestroy() {

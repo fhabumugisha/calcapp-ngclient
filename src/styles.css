@@ -11,12 +11,12 @@ body{margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 }
 
 /* Surcharge du style des composants angular material: mat-card, mat-accordion conformément à la charte graphique pda */
-.mat-card, .mat-expansion-panel {
+/* .mat-card, .mat-expansion-panel {
   border-style: solid;
   border-width: thin;
   border-radius: 0 !important;
   box-shadow: none !important;
-}
+} */
 
 .mat-button.mat-primary{
   background-color: var(--couleur-primaire)  !important;
@@ -136,8 +136,11 @@ div.mat-ripple-element.mat-slide-toggle-persistent-ripple {
 /* début : Structure pour les accordéons */
 
 /* Suppression de la marge du "body" du panel, car sinon un 2ème cadre noir apparait */
-.mat-expansion-panel-body {
+/* .mat-expansion-panel-body {
   padding: 0 0 0 0 !important;
+} */
+.mat-expansion-panel-body {
+  padding: 7px 7px 7px 7px !important;
 }
 
 

@@ -1,16 +1,18 @@
-import { Project } from './project.model';
+import { Project } from "./project.model";
 import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { map, catchError, tap } from "rxjs/operators";
-import { throwError } from 'rxjs';
+import { throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectService {
-
-
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json"
@@ -20,7 +22,7 @@ export class ProjectService {
 
   getProjects() {
     return this.http
-      .get<{ message: string, projects: any }>("http://localhost:3000/projects")
+      .get<{ message: string; projects: any }>("http://localhost:3000/projects")
       .pipe(
         catchError(this.handleError),
         map(data => {
@@ -37,36 +39,58 @@ export class ProjectService {
 
   createProject(project: Project) {
     return this.http
-      .post<{ message: string; projects: any }>("http://localhost:3000/projects", project, this.httpOptions )
+      .post<{ message: string; projects: any }>(
+        "http://localhost:3000/projects",
+        project,
+        this.httpOptions
+      )
       .pipe(
         catchError(this.handleError),
-        tap(data =>  console.log(data))
+        tap(data => console.log(data))
+      );
+  }
+
+  updateProject(projectId: string, project: Project) {
+    return this.http
+      .put<{ message: string; project: any }>(
+        "http://localhost:3000/projects/" + projectId,
+        project,
+        this.httpOptions
+      )
+      .pipe(
+        catchError(this.handleError),
+        map(data => {
+          return data.project;
+        })
       );
   }
 
   deleteProject(projectId: string) {
     return this.http
-    .delete<{ message: string }>("http://localhost:3000/projects/" + projectId )
-    .pipe(
-      catchError(this.handleError),
-      tap(data =>  console.log(data))
-    );
+      .delete<{ message: string }>(
+        "http://localhost:3000/projects/" + projectId
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap(data => console.log(data))
+      );
   }
 
-  getProject(projectId: string){
-
+  getProject(projectId: string) {
     return this.http
-    .get<{ message: string, project: any }>("http://localhost:3000/projects/" + projectId )
-    .pipe(
-      catchError(this.handleError),
-      map(data => {
-        return data.project ;
-      })
+      .get<{ message: string; project: any }>(
+        "http://localhost:3000/projects/" + projectId
+      )
+      .pipe(
+        catchError(this.handleError),
+        map(data => {
+          return data.project;
+        })
       );
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    const errorMessage = 'An unknown error occurred!';
+    const errorMessage = "An unknown error occurred!";
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }

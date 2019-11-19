@@ -5,7 +5,7 @@ import { Category } from './category.model';
 export class Project {
 
   constructor(
-   public id: string,
+   public _id: string,
    public title: string,
    public type: string,
    public description: string,
