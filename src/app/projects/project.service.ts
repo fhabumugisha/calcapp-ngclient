@@ -60,8 +60,9 @@ export class ProjectService {
     .pipe(
       catchError(this.handleError),
       map(data => {
-        return {...data.project, id: data.project._id.toString()} ;
-      }));
+        return data.project ;
+      })
+      );
   }
 
   private handleError(errorRes: HttpErrorResponse) {
