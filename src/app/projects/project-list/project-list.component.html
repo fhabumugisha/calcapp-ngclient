@@ -24,7 +24,7 @@
                     <div class="card-footer">
                         <a  style="cursor:pointer;" class="card-link text-primary "
 
-                          [routerLink]="[project.id, 'edit']"
+                          [routerLink]="[project._id, 'edit']"
                           routerLinkActive="active"
                          >Edit</a>
                         <a  style="cursor:pointer;" class="card-link text-danger " (click)="onDelete(project.id)">Delete</a>
@@ -35,7 +35,8 @@
 
 
 
-
+              <mat-paginator fxLayout="row" [length]="totalProjects" [pageSize]="projectsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+              *ngIf="projects.length > 0"></mat-paginator>
         </ng-container>
 
       <ng-template #noProjects>

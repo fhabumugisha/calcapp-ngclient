@@ -44,7 +44,7 @@ export class EditProjectComponent implements OnInit {
     let description = '';
     const itemsControls = new FormArray([]);
     const categoriesControls = new FormArray([]);
-    const categoryItems = new FormArray([]);
+
     title = this.project.title;
     type = this.project.type;
     description = this.project.description;
@@ -65,7 +65,7 @@ export class EditProjectComponent implements OnInit {
     }
     if (this.project['categories']) {
       for (const category of this.project.categories) {
-
+        const  categoryItems = new FormArray([]);
         if(category['items']){
           for (const item of category.items) {
             categoryItems.push(
@@ -81,7 +81,7 @@ export class EditProjectComponent implements OnInit {
             title: new FormControl(category.title, Validators.required),
             type: new FormControl(category.type, Validators.required),
             items : categoryItems,
-            totalAmount : new FormControl(),
+            totalAmount : new FormControl(category.totalAmount),
           })
         );
       }
@@ -139,10 +139,10 @@ export class EditProjectComponent implements OnInit {
   onAddCategory() {
     (<FormArray>this.projectForm.get('categories')).push(
       new FormGroup({
-        title: new FormControl(null, Validators.required),
+        title: new FormControl('New category', Validators.required),
         type: new FormControl(null, Validators.required ),
         items : new FormArray([]),
-        totalAmount : new FormControl()
+        totalAmount : new FormControl(null)
       })
     );
   }

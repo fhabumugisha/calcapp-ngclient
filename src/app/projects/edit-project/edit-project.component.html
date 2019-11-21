@@ -3,7 +3,7 @@
     Edit project
   </div>
   <div class="card-body">
-    <form
+    <form *ngIf="projectForm"
       [formGroup]="projectForm"
       (ngSubmit)="onSubmit()"
       class="example-form"
@@ -95,7 +95,7 @@
             <mat-panel-description>
 
             </mat-panel-description>
-            <mat-accordion>
+            <mat-accordion >
                 <div formArrayName="categories">
                 <mat-expansion-panel
                   (opened)="panelOpenState = true"
@@ -132,7 +132,7 @@
                             <div class="col">
                               <mat-form-field>
                                 <mat-label>Type</mat-label>
-                                <mat-select formControlName="type">
+                                <mat-select formControlName="type" required>
                                   <mat-option
                                     *ngFor="let type of categoryTypes"
                                     [value]="type.code"
@@ -202,32 +202,40 @@
                                   </div>
 
                                <mat-action-row>
-                                  <button
-                                  mat-icon-button
+                                  <a
+                                  mat-button
                                   color="accent" title="Add item"
                                   (click)="onAddCategoryItem(categoryCtrl)"
                                 >
-                                  <mat-icon>add</mat-icon>
-                                </button>
+                                  <!-- <mat-icon>add</mat-icon> --> Add Item
+                               </a>
                                 </mat-action-row>
                           </mat-expansion-panel>
                         </mat-accordion>
 
 
-
+                        <mat-action-row>
+                          <button type="button"
+                          mat-button
+                          color="accent" title="Add item"
+                          (click)="onDeleteCategory(i)"
+                        >
+                          <!-- <mat-icon>add</mat-icon> --> Delete category
+                       </button>
+                        </mat-action-row>
                 </mat-expansion-panel>
                 </div>
               </mat-accordion>
             <mat-action-row>
 
-              <button
-                mat-icon-button
+              <a
+                mat-button
                 color="accent"
                 (click)="onAddCategory()"
                 title="Add category"
               >
-                <mat-icon>add</mat-icon>
-              </button>
+                <!-- <mat-icon>add</mat-icon> --> Add Category
+            </a>
             </mat-action-row>
           </mat-expansion-panel>
         </mat-accordion>
@@ -245,7 +253,7 @@
           type="button"
           [routerLink]="['/projects']"
         >
-          Cancel
+          Return to list
         </button>
 
         <button

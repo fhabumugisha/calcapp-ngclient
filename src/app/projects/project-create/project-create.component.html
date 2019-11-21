@@ -11,7 +11,7 @@
 
           <mat-form-field >
               <mat-label>Type</mat-label>
-              <mat-select name="type" ngModel>
+              <mat-select name="type" ngModel required>
                 <mat-option *ngFor="let type of projectTypes" [value]="type.code">
                   {{type.label}}
                 </mat-option>

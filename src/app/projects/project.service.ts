@@ -20,19 +20,24 @@ export class ProjectService {
   };
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProjects() {
+  getProjects(projectsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${projectsPerPage}&page=${currentPage}`;
     return this.http
-      .get<{ message: string; projects: any }>("http://localhost:3000/projects")
+      .get<{ message: string; projects: any, totalItems: number}>("http://localhost:3000/projects" + queryParams)
       .pipe(
         catchError(this.handleError),
         map(data => {
-          console.log(data);
-          return data.projects.map(p => {
-            return {
-              ...p,
-              id: p._id
-            };
-          });
+
+          return {
+            projects : data.projects.map(p => {
+              return {
+                ...p,
+                id: p._id
+              };
+            }),
+            totalItems : data.totalItems
+
+          }
         })
       );
   }

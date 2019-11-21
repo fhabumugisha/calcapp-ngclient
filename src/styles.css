@@ -18,7 +18,7 @@ body{margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   box-shadow: none !important;
 } */
 
-.mat-button.mat-primary{
+/* .mat-button.mat-primary{
   background-color: var(--couleur-primaire)  !important;
   color: black !important;
   font-weight:bold;
@@ -73,7 +73,7 @@ body{margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 .mat-button.mat-warn .mat-button-focus-overlay{
   background: black;
-}
+} */
 
 /*  -----------------------------  */
 /* début : styles mat-slide-toggle */
@@ -139,9 +139,9 @@ div.mat-ripple-element.mat-slide-toggle-persistent-ripple {
 /* .mat-expansion-panel-body {
   padding: 0 0 0 0 !important;
 } */
-.mat-expansion-panel-body {
+/* .mat-expansion-panel-body {
   padding: 7px 7px 7px 7px !important;
-}
+} */
 
 
 
