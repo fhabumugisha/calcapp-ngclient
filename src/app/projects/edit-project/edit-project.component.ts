@@ -80,7 +80,8 @@ export class EditProjectComponent implements OnInit {
           new FormGroup({
             title: new FormControl(category.title, Validators.required),
             type: new FormControl(category.type, Validators.required),
-            items : categoryItems
+            items : categoryItems,
+            totalAmount : new FormControl(),
           })
         );
       }
@@ -140,7 +141,8 @@ export class EditProjectComponent implements OnInit {
       new FormGroup({
         title: new FormControl(null, Validators.required),
         type: new FormControl(null, Validators.required ),
-        items : new FormArray([])
+        items : new FormArray([]),
+        totalAmount : new FormControl()
       })
     );
   }

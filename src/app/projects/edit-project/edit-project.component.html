@@ -96,134 +96,130 @@
 
             </mat-panel-description>
             <mat-accordion>
+                <div formArrayName="categories">
                 <mat-expansion-panel
                   (opened)="panelOpenState = true"
                   (closed)="panelOpenState = false"
-                  *ngFor="let category of project.categories"
+
+                  *ngFor="
+                  let categoryCtrl of categoriesControls;
+                  let i = index
+                "
+                [formGroupName]="i"
                 >
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{ category.title }} - {{ category.type }} (
-                      {{ category.items.length }} items)
+                      {{ categoryCtrl.value.title }} - {{ categoryCtrl.value.type }} (
+                      {{ categoryCtrl.value.items.length }} items)
                     </mat-panel-title>
                     <mat-panel-description>
-                      Total amount : {{ category.totalAmount }}
+                      Total amount : {{ categoryCtrl.value.totalAmount }}
                     </mat-panel-description>
                   </mat-expansion-panel-header>
 
-                    <div style="margin: 10px;" formArrayName="categories">
-                      <div
-                        class="form-row"
-                        *ngFor="
-                          let categoryCtrl of categoriesControls;
-                          let i = index
-                        "
-                        [formGroupName]="i"
-                      >
-                        <div class="col">
-                          <mat-form-field>
-                            <input
-                              matInput
-                              placeholder="Title"
-                              formControlName="title"
-                              required
-                            />
-                          </mat-form-field>
-                        </div>
-                        <div class="col">
-                          <mat-form-field>
-                            <mat-label>Type</mat-label>
-                            <mat-select formControlName="type">
-                              <mat-option
-                                *ngFor="let type of categoryTypes"
-                                [value]="type.code"
-                              >
-                                {{ type.label }}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                        </div>
 
-                        <div class="col">
-                          <button
-                            mat-icon-button
-                            color="warn"
-                            (click)="onDeleteCategory(i)"
-                          >
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </div>
-
-                        <div class="container">
-                          <div class="form-row">
-                            <div class="col">Items</div>
+                      <div  class="form-row">
+                          <div class="col">
+                              <mat-form-field>
+                                <input
+                                  matInput
+                                  placeholder="Title"
+                                  formControlName="title"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
                             <div class="col">
-                              <button
-                                mat-icon-button
-                                color="accent"
-                                (click)="onAddCategoryItem(categoryCtrl)"
-                                title="Add item"
-                              >
-                                <mat-icon>add</mat-icon>
-                              </button>
-                            </div>
-                          </div>
-                          <mat-divider></mat-divider>
-
-                          <div class="row">
-                            <div class="col-xs-12" formArrayName="items">
-                              <div
-                                class="form-row"
-                                *ngFor="
-                                  let itemCtrl of getCategoryItemsControls(
-                                    categoryCtrl
-                                  );
-                                  let i = index
-                                "
-                                [formGroupName]="i"
-                              >
-                                <div class="col">
-                                  <mat-form-field>
-                                    <input
-                                      matInput
-                                      placeholder="Title"
-                                      formControlName="title"
-                                      required
-                                    />
-                                  </mat-form-field>
-                                </div>
-                                <div class="col">
-                                  <mat-form-field>
-                                    <input
-                                      matInput
-                                      placeholder="Amount"
-                                      formControlName="amount"
-                                      required
-                                    />
-                                  </mat-form-field>
-                                </div>
-
-                                <div class="col">
-                                  <button
-                                    mat-icon-button
-                                    color="warn"
-                                    (click)="
-                                      onDeleteCategoryItem(categoryCtrl, i)
-                                    "
+                              <mat-form-field>
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="type">
+                                  <mat-option
+                                    *ngFor="let type of categoryTypes"
+                                    [value]="type.code"
                                   >
-                                    <mat-icon>delete</mat-icon>
-                                  </button>
-                                </div>
-                              </div>
+                                    {{ type.label }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
                             </div>
-                          </div>
-                        </div>
+
+
+
                       </div>
-                    </div>
+                      <mat-divider></mat-divider>
+                      <mat-accordion>
+                          <mat-expansion-panel [hideToggle]="false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>Items ( {{getCategoryItemsControls(categoryCtrl).length}})</mat-panel-title>
+                              </mat-expansion-panel-header>
+
+                                  <div  formArrayName="items">
+                                    <div
+                                      class="form-row"
+                                      *ngFor="
+                                        let itemCtrl of getCategoryItemsControls(
+                                          categoryCtrl
+                                        );
+                                        let i = index
+                                      "
+                                      [formGroupName]="i"
+                                    >
+
+                                      <div class="col">
+
+                                        <mat-form-field>
+                                          <input
+                                            matInput
+                                            placeholder="Title"
+                                            formControlName="title"
+                                            required
+                                          />
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col">
+                                        <mat-form-field>
+                                          <input
+                                            matInput
+                                            placeholder="Amount"
+                                            formControlName="amount"
+                                            required
+                                          />
+                                        </mat-form-field>
+                                      </div>
+
+                                      <div class="col">
+                                        <button
+                                          mat-icon-button
+                                          color="warn"
+                                          (click)="
+                                            onDeleteCategoryItem(categoryCtrl, i)
+                                          "
+                                        >
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                               <mat-action-row>
+                                  <button
+                                  mat-icon-button
+                                  color="accent" title="Add item"
+                                  (click)="onAddCategoryItem(categoryCtrl)"
+                                >
+                                  <mat-icon>add</mat-icon>
+                                </button>
+                                </mat-action-row>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+
+
 
                 </mat-expansion-panel>
+                </div>
               </mat-accordion>
             <mat-action-row>
+
               <button
                 mat-icon-button
                 color="accent"
@@ -236,123 +232,9 @@
           </mat-expansion-panel>
         </mat-accordion>
 
-        <div class="form-row">
-          <div class="col">Categories</div>
-          <div class="col">
-            <button
-              mat-icon-button
-              color="accent"
-              (click)="onAddCategory()"
-              title="Add category"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
+
         <mat-divider></mat-divider>
-        <div class="row">
-          <div class="col-xs-12" formArrayName="categories">
-            <div
-              class="form-row"
-              *ngFor="let categoryCtrl of categoriesControls; let i = index"
-              [formGroupName]="i"
-            >
-              <div class="col">
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Title"
-                    formControlName="title"
-                    required
-                  />
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field>
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type">
-                    <mat-option
-                      *ngFor="let type of categoryTypes"
-                      [value]="type.code"
-                    >
-                      {{ type.label }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
 
-              <div class="col">
-                <button
-                  mat-icon-button
-                  color="warn"
-                  (click)="onDeleteCategory(i)"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-
-              <div class="container">
-                <div class="form-row">
-                  <div class="col">Items</div>
-                  <div class="col">
-                    <button
-                      mat-icon-button
-                      color="accent"
-                      (click)="onAddCategoryItem(categoryCtrl)"
-                      title="Add item"
-                    >
-                      <mat-icon>add</mat-icon>
-                    </button>
-                  </div>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="row">
-                  <div class="col-xs-12" formArrayName="items">
-                    <div
-                      class="form-row"
-                      *ngFor="
-                        let itemCtrl of getCategoryItemsControls(categoryCtrl);
-                        let i = index
-                      "
-                      [formGroupName]="i"
-                    >
-                      <div class="col">
-                        <mat-form-field>
-                          <input
-                            matInput
-                            placeholder="Title"
-                            formControlName="title"
-                            required
-                          />
-                        </mat-form-field>
-                      </div>
-                      <div class="col">
-                        <mat-form-field>
-                          <input
-                            matInput
-                            placeholder="Amount"
-                            formControlName="amount"
-                            required
-                          />
-                        </mat-form-field>
-                      </div>
-
-                      <div class="col">
-                        <button
-                          mat-icon-button
-                          color="warn"
-                          (click)="onDeleteCategoryItem(categoryCtrl, i)"
-                        >
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
       <hr />
       <div class="example-button-row">
