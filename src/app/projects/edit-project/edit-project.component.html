@@ -30,60 +30,79 @@
       </mat-form-field>
 
       <div
-        class="container"
+
         *ngIf="project.type === 'purchase' || project.type === 'other'"
       >
-        <div class="form-row">
-          <div class="col">Items</div>
-          <div class="col">
-            <button
-              mat-icon-button
-              color="accent"
-              (click)="onAddItem()"
-              title="Add item"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
+
 
         <mat-divider></mat-divider>
-        <div class="row">
-          <div class="col-xs-12" formArrayName="items">
-            <div
-              class="form-row"
-              *ngFor="let itemCtrl of itemsControls; let i = index"
-              [formGroupName]="i"
-            >
-              <div class="col">
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Title"
-                    formControlName="title"
-                    required
-                  />
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Amount"
-                    formControlName="amount"
-                    required
-                  />
-                </mat-form-field>
-              </div>
 
-              <div class="col">
-                <button mat-icon-button color="warn" (click)="onDeleteItem(i)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <mat-accordion>
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Items ( {{itemsControls.length}})  </mat-panel-title>
+                <mat-panel-description>
+                  Total amount : {{this.project.totalAmount}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+                  <div  formArrayName="items">
+                    <div
+                      class="form-row"
+                      *ngFor="
+                        let itemCtrl of itemsControls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+
+                      <div class="col">
+
+                        <mat-form-field>
+                          <input
+                            matInput
+                            placeholder="Title"
+                            formControlName="title"
+                            required
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field>
+                          <input
+                            matInput
+                            placeholder="Amount"
+                            formControlName="amount"
+                            required
+                          />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col">
+                        <button
+                          mat-icon-button
+                          color="warn"
+                          (click)="
+                            onDeleteItem(i)
+                          "
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+               <mat-action-row>
+                  <a
+                  mat-button
+                  color="accent" title="Add item"
+                  (click)="onAddItem(i)"
+                >
+                  <!-- <mat-icon>add</mat-icon> --> Add Item
+               </a>
+                </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
 
 
@@ -157,9 +176,7 @@
                                     <div
                                       class="form-row"
                                       *ngFor="
-                                        let itemCtrl of getCategoryItemsControls(
-                                          categoryCtrl
-                                        );
+                                        let itemCtrl of getCategoryItemsControls(categoryCtrl );
                                         let i = index
                                       "
                                       [formGroupName]="i"

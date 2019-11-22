@@ -102,6 +102,7 @@ export class EditProjectComponent implements OnInit {
     this.projectService.updateProject(this.id, this.projectForm.value).subscribe(data => {
       this.project =  data;
 
+      this.router.navigate(['../projects',this.project._id, 'edit'], { skipLocationChange: true});
     });
 
   }
@@ -142,7 +143,7 @@ export class EditProjectComponent implements OnInit {
         title: new FormControl('New category', Validators.required),
         type: new FormControl(null, Validators.required ),
         items : new FormArray([]),
-        totalAmount : new FormControl(null)
+        totalAmount : new FormControl(0)
       })
     );
   }

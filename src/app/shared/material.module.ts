@@ -19,9 +19,10 @@ import {MatSidenavModule,
   MatTableModule,
   MatPaginatorModule,
   MatExpansionModule} from '@angular/material';
+import { DropdownDirective } from './dropdown.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [DropdownDirective],
   imports: [
     CommonModule,
       MatButtonModule,
@@ -62,6 +63,7 @@ import {MatSidenavModule,
       MatPaginatorModule,
       MatSidenavModule,
       MatExpansionModule,
+      DropdownDirective
   ]
 })
 export class MaterialModule { }
