@@ -13,9 +13,11 @@ export class DropdownDirective {
   @HostBinding('class.show') isOpen = false;
   @HostListener('click')
   toggleShow() {
-    // console.log('show menu');
+
     this.isOpen = !this.isOpen;
     const menu = this.el.nativeElement.querySelector('.navbar-collapse');
+    console.log('show menu :' , this.el.nativeElement);
+    console.log('show menu :' , menu);
     if (this.isOpen) {
       this.renderer.addClass(menu, 'show');
     } else {

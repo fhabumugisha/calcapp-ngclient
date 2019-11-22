@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/calcapp-ngclient",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

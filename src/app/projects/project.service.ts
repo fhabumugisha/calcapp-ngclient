@@ -1,3 +1,5 @@
+
+import { environment } from './../../environments/environment';
 import { Project } from "./project.model";
 import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
@@ -9,6 +11,7 @@ import {
 import { map, catchError, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -18,12 +21,13 @@ export class ProjectService {
       "Content-Type": "application/json"
     })
   };
+   baseApiUrl =  environment.apiUrl;
   constructor(private http: HttpClient, private router: Router) {}
 
   getProjects(projectsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${projectsPerPage}&page=${currentPage}`;
     return this.http
-      .get<{ message: string; projects: any, totalItems: number}>("http://localhost:3000/projects" + queryParams)
+      .get<{ message: string; projects: any, totalItems: number}>(this.baseApiUrl +'/projects' + queryParams)
       .pipe(
         catchError(this.handleError),
         map(data => {
@@ -45,7 +49,7 @@ export class ProjectService {
   createProject(project: Project) {
     return this.http
       .post<{ message: string; projects: any }>(
-        "http://localhost:3000/projects",
+        this.baseApiUrl + "/projects",
         project,
         this.httpOptions
       )
@@ -58,7 +62,7 @@ export class ProjectService {
   updateProject(projectId: string, project: Project) {
     return this.http
       .put<{ message: string; project: any }>(
-        "http://localhost:3000/projects/" + projectId,
+        this.baseApiUrl + "/projects/" + projectId,
         project,
         this.httpOptions
       )
@@ -73,7 +77,7 @@ export class ProjectService {
   deleteProject(projectId: string) {
     return this.http
       .delete<{ message: string }>(
-        "http://localhost:3000/projects/" + projectId
+        this.baseApiUrl + "/projects/" + projectId
       )
       .pipe(
         catchError(this.handleError),
@@ -84,7 +88,7 @@ export class ProjectService {
   getProject(projectId: string) {
     return this.http
       .get<{ message: string; project: any }>(
-        "http://localhost:3000/projects/" + projectId
+        this.baseApiUrl + "/projects/" + projectId
       )
       .pipe(
         catchError(this.handleError),

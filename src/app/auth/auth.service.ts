@@ -1,9 +1,12 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
+
+
 export interface AuthResponseData {
 
   token: string;
@@ -28,6 +31,8 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null);
 
+  baseApiUrl =  environment.apiUrl;
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -38,7 +43,7 @@ export class AuthService {
       password: password,
       confirmPassword: confirmPassword
     }
-    return this.http.post('http://localhost:3000/auth/signup', body, this.httpOptions   )
+    return this.http.post(this.baseApiUrl + '/auth/signup', body, this.httpOptions   )
     .pipe(
       catchError(this.handleError)
     );
@@ -50,7 +55,7 @@ export class AuthService {
       email: email,
       password: password
     };
-    return this.http.post<AuthResponseData>('http://localhost:3000/auth/login', body, this.httpOptions)
+    return this.http.post<AuthResponseData>(this.baseApiUrl + '/auth/login', body, this.httpOptions)
     .pipe(
       catchError(this.handleError),
       tap(resData => {
