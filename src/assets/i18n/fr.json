@@ -1,0 +1,90 @@
+{
+
+
+  "GENERAL": {
+    "TITRE_APP": "Calcapp.io"
+  },
+  "AIDE": {
+    "TITRE": "Aide",
+    "TOOLTIP_TITRE": "Cliquez ici pour afficher l'aide"
+  },
+  "BLOC_ERREUR": {
+
+  },
+  "HEADER": {
+    "CHANGER_LANGUE": "English version",
+    "NOUS_CONTACTER": "Nous contacter"
+  },
+  "FOOTER": {
+    "INFORMATIONS_SUR_SITE": "Informations sur le site",
+    "CONTACT": "Contact",
+    "MENTIONS_LEGALES": "Mentions légales"
+
+  },
+  "MENUS": {
+    "ACCUEIL": "Accueil",
+    "PROJECTS": "Mes projets",
+    "LOGIN": "Se connecter",
+    "SIGNUP": "Créer un compter",
+    "LOGOUT": "Se déconnecter"
+
+  },
+  "BOUTON": {
+    "LOGOUT": "Se déconnecter",
+    "SIGNUP": "Créer un compte",
+    "EDIT_PROJECT": "Modifier",
+    "SUPPRIMER": "SUPPRIMER",
+    "ADD_ITEM": "Ajouter élément",
+    "DELETE_ITEM": "Supprimer élément",
+    "ADD_CATEGORY": "Ajouter catégorie",
+    "DELETE_CATEGORY": "Supprimer catégory",
+    "LOGIN": "Se connecter",
+    "CREATE_PROJECT": "Créer un projet",
+    "DELETE" : "Supprimer",
+    "SAVE" : "Enregistrer"
+
+  },
+
+  "LOGIN_FORM" : {
+    "TITLE" : "Connection",
+    "EMAIL_LABEL" : "E-mail",
+    "PASSWORD_LABEL" : "Mot de passe"
+  },
+  "SIGNUP_FORM" : {
+    "TITLE" : "Création d'un compte",
+    "EMAIL_LABEL" : "E-mail",
+    "PASSWORD_LABEL" : "Mot de passe",
+    "CONFIRM_PASSWORD_LABEL" : "Confirmer le mot de passe"
+  },
+  "TABLEAU": {
+    "FILTRER": "Filtrer",
+    "FILTRER_NAVIRE": "Filtres",
+    "SAISIE_FILTRE":"Veuillez saisir 3 caractères pour filtrer"
+  },
+  "PROJECTS" : {
+    "NO_PROJECT_TITLE" : "Vous n'avez pas encore crée de projets.",
+    "NO_PROJECT_TEXT" : "Vos futures projets seront affichés ici.",
+    "ADD_PROJECT": "Ajouter un projet",
+    "DELETE" : "Supprimer",
+    "EDIT": "Modifier",
+    "RETURN_LIST" : "Liste des projets"
+
+  },
+
+  "PAGINATOR" : {
+    "ITEMS_PER_PAGE" :"Eléments par page"
+  },
+  "EDIT_PROJECT" : {
+    "TITLE" : "Modification  du projet",
+    "CATEGORIES" : "Catégories",
+    "ITEMS" : "Eléments",
+    "DELETE" : "Supprimer",
+    "EDIT": "Modifier",
+    "ADD_ITEM": "Ajouter élément",
+    "DELETE_ITEM": "Supprimer élément",
+    "ADD_CATEGORY": "Ajouter catégorie",
+    "DELETE_CATEGORY": "Supprimer catégory",
+    "AMOUNT" : "Montant",
+    "TOTAL_AMOUNT" : "Montant total"
+  }
+}

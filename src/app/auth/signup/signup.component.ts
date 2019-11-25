@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  isLoading = false;
   constructor(private authService: AuthService,
               private router: Router) { }
 
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     if (!signupForm.valid) {
       return;
     }
-
+    this.isLoading = true;
     const email =  signupForm.value.email;
     const password = signupForm.value.password;
     const confirmPassword = signupForm.value.confirmPassword;

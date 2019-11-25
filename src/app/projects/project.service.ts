@@ -67,10 +67,8 @@ export class ProjectService {
         this.httpOptions
       )
       .pipe(
-        catchError(this.handleError),
-        map(data => {
-          return data.project;
-        })
+        catchError(this.handleError)
+
       );
   }
 

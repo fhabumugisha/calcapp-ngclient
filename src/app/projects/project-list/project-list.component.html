@@ -1,55 +1,68 @@
+<ng-container *ngIf="projects.length > 0; else noProjects">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="example-button-row">
+        <a mat-raised-button color="accent" routerLink="new">
+          <mat-icon>add</mat-icon>
+          {{ "PROJECTS.ADD_PROJECT" | translate }}</a
+        >
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="card-deck">
+    <div class="card" *ngFor="let project of projects">
+      <div class="card-body">
+        <h5 class="card-title">{{ project.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ project.type }}</h6>
+        <span class="card-text"
+          >{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :
+          {{ project.totalAmount }} EUR</span
+        >
+        <p class="card-text">{{ project.description }}</p>
+      </div>
+      <div class="card-footer">
+        <a
+          style="cursor:pointer;"
+          class="card-link text-primary "
+          [routerLink]="[project._id, 'edit']"
+          routerLinkActive="active"
+          >{{ "PROJECTS.EDIT" | translate }}</a
+        >
+        <a
+          style="cursor:pointer;"
+          class="card-link text-danger "
+          (click)="onDelete(project._id)"
+        >
+          {{ "PROJECTS.DELETE" | translate }}</a
+        >
+      </div>
+    </div>
+  </div>
 
-        <ng-container *ngIf="projects.length > 0; else noProjects">
-            <div class="row">
-              <div class='col-md-12'>
-                  <div class="example-button-row">
-                      <a mat-raised-button color="accent" routerLink="new" >
-                          <mat-icon>add</mat-icon>
-                        New project</a>
-                    </div>
-              </div>
-            </div>
-            <hr>
-            <div class="card-deck">
+  <mat-paginator
+    fxLayout="row"
+    [length]="totalProjects"
+    [pageSize]="projectsPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)"
+    *ngIf="projects.length > 0"
+  ></mat-paginator>
+</ng-container>
 
-                <div class="card"  *ngFor="let project of projects">
-                    <div class="card-body">
-                      <h5 class="card-title">   {{project.title}}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted"> {{project.type}}</h6>
-                      <span class="card-text">Total amount : {{project.totalAmount}} EUR</span>
-                      <p class="card-text">{{project.description}}</p>
-
-                    </div>
-                    <div class="card-footer">
-                        <a  style="cursor:pointer;" class="card-link text-primary "
-
-                          [routerLink]="[project._id, 'edit']"
-                          routerLinkActive="active"
-                         >Edit</a>
-                        <a  style="cursor:pointer;" class="card-link text-danger " (click)="onDelete(project.id)">Delete</a>
-
-                      </div>
-                  </div>
-              </div>
-
-
-
-              <mat-paginator fxLayout="row" [length]="totalProjects" [pageSize]="projectsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-              *ngIf="projects.length > 0"></mat-paginator>
-        </ng-container>
-
-      <ng-template #noProjects>
-
-        <div class="card text-center">
-
-            <div class="card-body">
-              <h5 class="card-title">You haven't yet any project.</h5>
-              <p class="card-text">Your projects will be displaeyd here.</p>
-              <a href="#" class="btn btn-primary" routerLink="new" routerLinkActive="active">Add new project</a>
-
-            </div>
-
-          </div>
-
-      </ng-template>
-
+<ng-template #noProjects>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">{{ "PROJECTS.NO_PROJECT_TITLE" | translate }}</h5>
+      <p class="card-text">{{ "PROJECTS.NO_PROJECT_TEXT" | translate }}</p>
+      <a
+        href="#"
+        class="btn btn-primary"
+        routerLink="new"
+        routerLinkActive="active"
+      >
+        {{ "PROJECTS.ADD_PROJECT" | translate }}
+      </a>
+    </div>
+  </div>
+</ng-template>

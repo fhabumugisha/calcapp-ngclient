@@ -1,22 +1,33 @@
 
 
-
-    <div class="card mx-auto example-container">
+<mat-spinner *ngIf="isLoading" mx-auto></mat-spinner>
+    <div class="card mx-auto example-container" *ngIf="!isLoading">
       <div class="card-header">
-        Log in
+        {{ 'LOGIN_FORM.TITLE' | translate }}
       </div>
       <div class="card-body">
         <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="example-form">
 
             <mat-form-field >
-              <input matInput placeholder="Email" name="email" ngModel email required>
+              <input matInput
+              placeholder=" {{ 'LOGIN_FORM.EMAIL_LABEL' | translate }}"
+              name="email" ngModel email required>
             </mat-form-field>
 
             <mat-form-field >
-              <input matInput placeholder="Password" name="password" ngModel required minlength="5" type="password">
+              <input matInput
+              placeholder="{{ 'LOGIN_FORM.PASSWORD_LABEL' | translate }}"
+              name="password"
+               ngModel
+               required
+               minlength="5"
+               type="password">
             </mat-form-field>
             <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
-            type="submit" [disabled]="!loginForm.valid">Log in</button>
+            type="submit"
+            [disabled]="!loginForm.valid">
+            {{ 'BOUTON.LOGIN' | translate }}
+          </button>
 
         </form>
       </div>

@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  isLoading = false;
   constructor(
     private authService: AuthService,
     private router: Router) { }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     }
     const email = loginForm.value.email;
     const password = loginForm.value.password;
-
+    this.isLoading = true;
     this.authService.login(email, password).subscribe(
       resData => {
 

@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationModule } from '../translation/translation.module';
 
 
 
@@ -20,7 +22,9 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ProjectsRoutingModule
+    ProjectsRoutingModule,
+    TranslateModule,
+    TranslationModule,
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA ]
 })

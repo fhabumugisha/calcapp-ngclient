@@ -19,6 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { TranslationModule } from './translation/translation.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -32,6 +34,8 @@ import { MatListModule } from '@angular/material/list';
   imports: [
     BrowserModule,
     HttpClientModule,
+    TranslateModule,
+    TranslationModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

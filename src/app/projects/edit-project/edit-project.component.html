@@ -1,6 +1,6 @@
 <div class="card mx-auto example-container">
   <div class="card-header">
-    Edit project
+    {{ "EDIT_PROJECT.TITLE" | translate }}
   </div>
   <div class="card-body">
     <form *ngIf="projectForm"
@@ -40,9 +40,9 @@
         <mat-accordion>
           <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title>Items ( {{itemsControls.length}})  </mat-panel-title>
+                <mat-panel-title>{{ "EDIT_PROJECT.ITEMS" | translate }} ( {{itemsControls.length}})  </mat-panel-title>
                 <mat-panel-description>
-                  Total amount : {{this.project.totalAmount}}
+                  {{ 'EDIT_PROJECT.TOTAL_AMOUNT' | translate }} : {{this.project.totalAmount}}
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
@@ -71,7 +71,7 @@
                         <mat-form-field>
                           <input
                             matInput
-                            placeholder="Amount"
+                            placeholder="{{ 'EDIT_PROJECT.AMOUNT' | translate }}"
                             formControlName="amount"
                             required
                           />
@@ -96,10 +96,10 @@
                <mat-action-row>
                   <a
                   mat-button
-                  color="accent" title="Add item"
+                  color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
                   (click)="onAddItem()"
                 >
-                  <!-- <mat-icon>add</mat-icon> --> Add Item
+                 {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
                </a>
                 </mat-action-row>
           </mat-expansion-panel>
@@ -110,7 +110,7 @@
         <mat-accordion *ngIf="project.type === 'budget'">
           <mat-expansion-panel>
             <mat-expansion-panel-header color="primary">
-              Categories ({{ project.categories.length }})
+              {{ "EDIT_PROJECT.CATEGORIES" | translate }} ({{ project.categories.length }})
             </mat-expansion-panel-header>
             <mat-panel-description>
 
@@ -129,10 +129,10 @@
                 >
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{ categoryCtrl.value.title }} <span class="d-none d-sm-block"> - {{ categoryCtrl.value.type }} ( {{ categoryCtrl.value.items.length }} items)</span>
+                      {{ categoryCtrl.value.title }} <span class="d-none d-sm-block"> &nbsp; - {{ categoryCtrl.value.type }}  ( {{ categoryCtrl.value.items.length }} {{ "EDIT_PROJECT.ITEMS" | translate }})</span>
                     </mat-panel-title>
                     <mat-panel-description class="d-none d-sm-block">
-                      Total amount : {{ categoryCtrl.value.totalAmount }}
+                      {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount }}
                     </mat-panel-description>
                   </mat-expansion-panel-header>
 
@@ -169,7 +169,7 @@
                       <mat-accordion>
                           <mat-expansion-panel [hideToggle]="false">
                               <mat-expansion-panel-header>
-                                <mat-panel-title>Items ( {{getCategoryItemsControls(categoryCtrl).length}})</mat-panel-title>
+                                <mat-panel-title>{{ "EDIT_PROJECT.ITEMS" | translate }} ( {{getCategoryItemsControls(categoryCtrl).length}})</mat-panel-title>
                               </mat-expansion-panel-header>
 
                                   <div  formArrayName="items">
@@ -197,7 +197,7 @@
                                         <mat-form-field>
                                           <input
                                             matInput
-                                            placeholder="Amount"
+                                            placeholder="{{ 'EDIT_PROJECT.AMOUNT' | translate }}"
                                             formControlName="amount"
                                             required
                                           />
@@ -222,10 +222,10 @@
                                <mat-action-row>
                                   <a
                                   mat-button
-                                  color="accent" title="Add item"
+                                  color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
                                   (click)="onAddCategoryItem(categoryCtrl)"
                                 >
-                                  <!-- <mat-icon>add</mat-icon> --> Add Item
+                                 {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
                                </a>
                                 </mat-action-row>
                           </mat-expansion-panel>
@@ -235,10 +235,10 @@
                         <mat-action-row>
                           <button type="button"
                           mat-button
-                          color="accent" title="Add item"
+                          color="accent" title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
                           (click)="onDeleteCategory(i)"
                         >
-                          <!-- <mat-icon>add</mat-icon> --> Delete category
+                          {{ "EDIT_PROJECT.DELETE_CATEGORY" | translate }}
                        </button>
                         </mat-action-row>
                 </mat-expansion-panel>
@@ -250,9 +250,9 @@
                 mat-button
                 color="accent"
                 (click)="onAddCategory()"
-                title="Add category"
+                title="{{ 'EDIT_PROJECT.ADD_CATEGORY' | translate }}"
               >
-                <!-- <mat-icon>add</mat-icon> --> Add Category
+              {{ "EDIT_PROJECT.ADD_CATEGORY" | translate }}
             </a>
             </mat-action-row>
           </mat-expansion-panel>
@@ -271,7 +271,8 @@
           type="button"
           [routerLink]="['/projects']"
         >
-          Return to list
+
+        {{ "PROJECTS.RETURN_LIST" | translate }}
         </button>
 
         <button
@@ -282,7 +283,7 @@
           type="submit"
           [disabled]="!projectForm.valid"
         >
-          Save
+        {{ "BOUTON.SAVE" | translate }}
         </button>
       </div>
     </form>

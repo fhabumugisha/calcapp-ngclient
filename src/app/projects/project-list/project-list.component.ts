@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Project } from "src/app/projects/project.model";
 import { Subscription } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: "app-project-list",
@@ -21,7 +21,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   pageSizeOptions = [1, 2, 5, 10];
   constructor(private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.projectService.getProjects(this.projectsPerPage, this.currentPage).subscribe((data : {projects: Project[], totalItems: number}) => {
@@ -43,6 +44,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   onDelete(projectId: string) {
     this.projectService.deleteProject(projectId).subscribe(result => {
       this.projects = this.projects.filter(p => p._id !== projectId);
+      this.openSnackBar(result.message, 'Ok');
     //   this.projectService.getProjects(this.projectsPerPage, this.currentPage)
     // .subscribe((data : {projects: Project[], totalItems: number}) => {
     //   this.projects = data.projects;
@@ -51,6 +53,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     // });
     });
   }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+       duration: 2000,
+    });
+ }
 
   onChangedPage(pageData: PageEvent) {
    // this.isLoading = true;

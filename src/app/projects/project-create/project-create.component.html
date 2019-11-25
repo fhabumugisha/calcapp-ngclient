@@ -22,9 +22,29 @@
               <textarea matInput placeholder="Description" name="description" ngModel ></textarea>
             </mat-form-field>
 
-          <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
-          type="submit" [disabled]="!createProjectForm.valid">Save</button>
 
+
+          <div class="example-button-row">
+            <button
+              mat-stroked-button
+              mat-raised-button
+              mat-primary
+              type="button"
+              [routerLink]="['/projects']"
+            >
+
+            {{ "PROJECTS.RETURN_LIST" | translate }}
+            </button>
+
+
+
+            <button mat-stroked-button
+            mat-raised-button  mat-primary color="primary"
+            type="submit" [disabled]="!createProjectForm.valid">
+            {{ "BOUTON.SAVE" | translate }}
+          </button>
+
+          </div>
       </form>
     </div>
 

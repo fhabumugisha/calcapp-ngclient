@@ -10,3 +10,7 @@ textarea {
   flex-direction: column;
   max-width: 22rem;
 }
+
+mat-spinner {
+  margin: auto;
+}

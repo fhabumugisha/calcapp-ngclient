@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { ProjectService } from "../project.service";
 import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: "app-edit-project",
@@ -13,12 +14,14 @@ export class EditProjectComponent implements OnInit {
   id: string;
   editMode = false;
   project: Project;
+  messageAction = '';
   projectForm : FormGroup;
   panelOpenState = false;
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -100,13 +103,20 @@ export class EditProjectComponent implements OnInit {
   onSubmit() {
     console.log(this.projectForm.value);
     this.projectService.updateProject(this.id, this.projectForm.value).subscribe(data => {
-      this.project =  data;
+      this.project =  data.project;
+      this.messageAction = data.message;
+      this.panelOpenState =  false;
+    this.openSnackBar(this.messageAction, "Ok");
+    this.router.navigate(['../projects',this.project._id, 'edit'], { skipLocationChange: true});
 
-      this.router.navigate(['../projects',this.project._id, 'edit'], { skipLocationChange: true});
     });
 
   }
-
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+       duration: 2000,
+    });
+ }
 
 
   get itemsControls() {
