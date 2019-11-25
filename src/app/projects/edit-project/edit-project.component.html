@@ -89,6 +89,7 @@
                           <mat-icon>delete</mat-icon>
                         </button>
                       </div>
+                      <mat-divider></mat-divider>
                     </div>
                   </div>
 
@@ -128,10 +129,9 @@
                 >
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{ categoryCtrl.value.title }} - {{ categoryCtrl.value.type }} (
-                      {{ categoryCtrl.value.items.length }} items)
+                      {{ categoryCtrl.value.title }} <span class="d-none d-sm-block"> - {{ categoryCtrl.value.type }} ( {{ categoryCtrl.value.items.length }} items)</span>
                     </mat-panel-title>
-                    <mat-panel-description>
+                    <mat-panel-description class="d-none d-sm-block">
                       Total amount : {{ categoryCtrl.value.totalAmount }}
                     </mat-panel-description>
                   </mat-expansion-panel-header>
@@ -215,6 +215,7 @@
                                           <mat-icon>delete</mat-icon>
                                         </button>
                                       </div>
+                                      <mat-divider></mat-divider>
                                     </div>
                                   </div>
 
