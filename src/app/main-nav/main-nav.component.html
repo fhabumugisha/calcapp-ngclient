@@ -48,6 +48,13 @@
       >
         {{ "MENUS.LOGOUT" | translate }}
       </a>
+
+      <mat-form-field >
+        <mat-select value="fr">
+          <mat-option (click)="drawer.toggle();changerLanguage('fr')" value="fr">Français</mat-option>
+          <mat-option  (click)="drawer.toggle();changerLanguage('en')" value="en">Anglais</mat-option>
+        </mat-select>
+      </mat-form-field>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -97,12 +104,20 @@
         >
           {{ "MENUS.LOGOUT" | translate }}
         </a>
+        <mat-form-field>
+          <mat-select value="fr">
+            <mat-option value="fr">Français</mat-option>
+            <mat-option value="en">Anglais</mat-option>
+          </mat-select>
+        </mat-form-field>
       </ng-container>
+
     </mat-toolbar>
     <!-- Add Content Here -->
     <br />
     <main style="padding: 15px;">
       <ng-content></ng-content>
     </main>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

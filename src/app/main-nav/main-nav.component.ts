@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-nav',
@@ -16,16 +17,27 @@ export class MainNavComponent implements OnInit, OnDestroy{
       map(result => result.matches),
       shareReplay()
     );
+
     isAuthenticated = false;
     private userSub: Subscription;
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
+    language: string;
+
+
+  constructor(private breakpointObserver: BreakpointObserver,
+     private authService: AuthService,
+     private translate: TranslateService) {}
 
   ngOnInit() {
+    this.language = 'fr';
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
-      console.log(!user);
-      console.log(!!user);
     });
+  }
+
+
+  changerLanguage(language: string) {
+    this.translate.use(language);
+    this.language = language;
   }
   onLogout() {
     this.authService.logout();

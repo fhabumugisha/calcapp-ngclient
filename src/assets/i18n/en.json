@@ -22,16 +22,16 @@
 
   },
   "MENUS": {
-    "ACCUEIL": "Accueil",
-    "PROJECTS": "Mes projets",
-    "LOGIN": "Se connecter",
-    "SIGNUP": "Créer un compter",
-    "LOGOUT": "Se déconnecter"
+    "ACCUEIL": "Home",
+    "PROJECTS": "My projects",
+    "LOGIN": "Login",
+    "SIGNUP": "Sign up",
+    "LOGOUT": "Sign out"
 
   },
   "BOUTON": {
-    "LOGOUT": "Se déconnecter",
-    "CONNEXION": "Se connecter",
+    "LOGOUT": "Sign out",
+    "CONNEXION": "Login",
     "SIGNUP": "Créer un compte",
     "EDIT_PROJECT": "Modifier",
     "SUPPRIMER": "SUPPRIMER",
@@ -48,9 +48,9 @@
 
 
   "LOGIN_FORM" : {
-    "TITLE" : "Connection",
+    "TITLE" : "Login",
     "EMAIL_LABEL" : "E-mail",
-    "PASSWORD_LABEL" : "Mot de passe"
+    "PASSWORD_LABEL" : "Password"
   },
   "SIGNUP_FORM" : {
     "TITLE" : "Création d'un compte",
