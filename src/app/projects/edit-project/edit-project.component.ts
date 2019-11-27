@@ -107,7 +107,8 @@ export class EditProjectComponent implements OnInit {
       this.messageAction = data.message;
       this.panelOpenState =  false;
     this.openSnackBar(this.messageAction, "Ok");
-    this.router.navigate(['../projects',this.project._id, 'edit'], { skipLocationChange: true});
+   // this.router.navigate(['../projects',this.project._id, 'edit']);
+    this.ngOnInit();
 
     });
 
@@ -202,12 +203,12 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
       label: "Other"
     },
     {
-      code: "revenue",
-      label: "Revenue"
+      code: "income",
+      label: "Income"
     },
     {
-      code: "spent",
-      label: "Spent"
+      code: "expenses",
+      label: "Expenses"
     }
   ];
 }

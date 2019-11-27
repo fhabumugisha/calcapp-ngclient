@@ -32,7 +32,7 @@
   "BOUTON": {
     "LOGOUT": "Sign out",
     "CONNEXION": "Login",
-    "SIGNUP": "Créer un compte",
+    "SIGNUP": "Sign up",
     "EDIT_PROJECT": "Edit",
     "SUPPRIMER": "DELETE",
     "ADD_ITEM": "Ajouter élément",
@@ -56,7 +56,7 @@
     "TITLE" : "Sign up",
     "EMAIL_LABEL" : "E-mail",
     "PASSWORD_LABEL" : "Password",
-    "CONFIRM_PASSWORD_LABEL" : "Confirme Password"
+    "CONFIRM_PASSWORD_LABEL" : "Confirm Password"
   },
   "TABLEAU": {
     "FILTRER": "Filtrer",

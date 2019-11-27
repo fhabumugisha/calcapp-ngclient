@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationModule } from '../translation/translation.module';
@@ -18,6 +18,7 @@ const authRoutes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(authRoutes),
     MaterialModule,
     TranslateModule,

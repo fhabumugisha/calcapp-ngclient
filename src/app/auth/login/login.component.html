@@ -11,17 +11,21 @@
             <mat-form-field >
               <input matInput
               placeholder=" {{ 'LOGIN_FORM.EMAIL_LABEL' | translate }}"
-              name="email" ngModel email required>
+              name="email" #emailInput="ngModel" ngModel email required>
+              <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+
             </mat-form-field>
 
             <mat-form-field >
               <input matInput
               placeholder="{{ 'LOGIN_FORM.PASSWORD_LABEL' | translate }}"
               name="password"
-               ngModel
+              #passwordInput="ngModel"
+              ngModel
                required
                minlength="5"
                type="password">
+               <mat-error *ngIf="passwordInput.invalid">Please enter a valid password. Min length 5</mat-error>
             </mat-form-field>
             <button mat-stroked-button mat-raised-button class="btn-block " mat-primary color="primary"
             type="submit"

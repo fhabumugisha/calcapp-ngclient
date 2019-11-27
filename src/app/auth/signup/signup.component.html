@@ -15,16 +15,22 @@
               <input matInput
                placeholder="{{ 'SIGNUP_FORM.EMAIL_LABEL' | translate }}"
                name="email"
+               #emailInput="ngModel"
                ngModel
                email
                required>
+               <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <input matInput
               placeholder="{{ 'SIGNUP_FORM.PASSWORD_LABEL' | translate }}"
                name="password"
+               #passwordInput="ngModel"
                ngModel required minlength="5" type="password">
+               <mat-error *ngIf="passwordInput.invalid">Please enter a valid password. min length 5</mat-error>
+
             </mat-form-field>
 
             <mat-form-field class="example-full-width">

@@ -5,7 +5,9 @@ import { Project } from "src/app/projects/project.model";
 import { Subscription } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent, MatSnackBar } from '@angular/material';
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: "app-project-list",
   templateUrl: "./project-list.component.html",
@@ -72,6 +74,24 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
 
+  generatePdf(projectId: string){
+    this.projectService.getProject(projectId).subscribe(data => {
+      const project: Project  =  data;
+      const documentDefinition = { content: [
+        {
+          text: project.title,
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+
+        }
+      ] };
+      pdfMake.createPdf(documentDefinition).open();
+      //https://www.ngdevelop.tech/angular-8-export-to-pdf-using-pdfmake/
+    });
+
+
+  }
   ngOnDestroy() {
     //  this.subscription.unsubscribe();
   }

@@ -85,7 +85,7 @@ export class AuthService {
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
-
+    console.log(errorRes.error);
     return throwError(errorRes.error.error);
   }
 
@@ -96,13 +96,12 @@ export class AuthService {
     token: string,
     expiresIn: number
   ) {
-    console.log('handleAuthentication');
 
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
-    console.log('handleAuthentication userData : ', user);
+
     localStorage.setItem('userData', JSON.stringify(user));
   }
 

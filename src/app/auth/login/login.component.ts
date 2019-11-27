@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       },
       errorMessage => {
         console.log(errorMessage);
+        this.isLoading = false;
 
       }
     );
