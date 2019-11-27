@@ -33,16 +33,16 @@
     "LOGOUT": "Sign out",
     "CONNEXION": "Login",
     "SIGNUP": "Créer un compte",
-    "EDIT_PROJECT": "Modifier",
-    "SUPPRIMER": "SUPPRIMER",
+    "EDIT_PROJECT": "Edit",
+    "SUPPRIMER": "DELETE",
     "ADD_ITEM": "Ajouter élément",
     "DELETE_ITEM": "Supprimer élément",
     "ADD_CATEGORY": "Ajouter catégorie",
-    "DELETE_CATEGORY": "Supprimer catégory",
+    "DELETE_CATEGORY": "Supprimer catégorie",
     "LOGIN": "Se connecter",
-    "CREATE_PROJECT": "Créer un projet",
-    "DELETE" : "Supprimer"
-
+    "CREATE_PROJECT": "Create a project",
+    "DELETE" : "Delete",
+    "SAVE" : "Save"
 
   },
 
@@ -53,10 +53,10 @@
     "PASSWORD_LABEL" : "Password"
   },
   "SIGNUP_FORM" : {
-    "TITLE" : "Création d'un compte",
+    "TITLE" : "Sign up",
     "EMAIL_LABEL" : "E-mail",
-    "PASSWORD_LABEL" : "Mot de passe",
-    "CONFIRM_PASSWORD_LABEL" : "Confirmer le mot de passe"
+    "PASSWORD_LABEL" : "Password",
+    "CONFIRM_PASSWORD_LABEL" : "Confirme Password"
   },
   "TABLEAU": {
     "FILTRER": "Filtrer",
@@ -64,7 +64,28 @@
     "SAISIE_FILTRE":"Veuillez saisir 3 caractères pour filtrer"
   },
   "PROJECTS" : {
-    "NO_PROJECT_TITLE" : "Vous n'avez pas encore crées de projets.",
-    "NO_PROJECT_TEXT" : "YVos futures projets seront affichés ici."
-  }
+    "NO_PROJECT_TITLE" : "You haven't created any project ey",
+    "NO_PROJECT_TEXT" : "Your futur projects wil be displayed here.",
+    "ADD_PROJECT": "Add a project",
+    "DELETE" : "Delete",
+    "EDIT": "Edit",
+    "RETURN_LIST" : "Return to projects"
+  },
+  "PAGINATOR" : {
+    "ITEMS_PER_PAGE" :"Items per page"
+  },
+  "EDIT_PROJECT" : {
+    "TITLE" : "Edit project",
+    "CATEGORIES" : "Categories",
+    "ITEMS" : "Items",
+    "DELETE" : "Delete",
+    "EDIT": "Edit",
+    "ADD_ITEM": "Add item ",
+    "DELETE_ITEM": "Delete item ",
+    "ADD_CATEGORY": "Add category ",
+    "DELETE_CATEGORY": "Delete category ",
+    "AMOUNT" : "Amount",
+    "TOTAL_AMOUNT" : "Total amount"
+
+}
 }

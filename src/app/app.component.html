@@ -1,14 +1,3 @@
-<!-- <app-header></app-header>
-<main>
-
-
-  <router-outlet></router-outlet>
-
-
-
-</main> -->
-
-<app-main-nav>
-
+<app-main-nav (switchLanguage)="changerLanguage($event)">
   <router-outlet></router-outlet>
 </app-main-nav>

@@ -12,21 +12,12 @@ import {
 
 export { LocaleService } from './locale.service';
 
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ]
 })
 export class TranslationModule {

@@ -106,8 +106,8 @@
         </a>
         <mat-form-field>
           <mat-select value="fr">
-            <mat-option value="fr">Français</mat-option>
-            <mat-option value="en">Anglais</mat-option>
+            <mat-option value="fr" (click)="changerLanguage('fr')">Français</mat-option>
+            <mat-option value="en" (click)="changerLanguage('en')">Anglais</mat-option>
           </mat-select>
         </mat-form-field>
       </ng-container>

@@ -1,5 +1,6 @@
 import { AuthService } from './auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   title = 'calcapp-ngclient';
-  constructor(private authService: AuthService){}
+  language: string;
+  constructor(private authService: AuthService,
+              private translate: TranslateService){}
 
   ngOnInit(): void {
-   this.authService.autoLogin();
+    this.language = 'en';
+    this.authService.autoLogin();
+  }
+
+  changerLanguage(language: string) {
+    this.translate.use(language).subscribe(() => {
+      this.language = language;
+    });
+
+
   }
 }

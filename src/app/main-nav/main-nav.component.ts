@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-main-nav',
@@ -20,15 +20,14 @@ export class MainNavComponent implements OnInit, OnDestroy{
 
     isAuthenticated = false;
     private userSub: Subscription;
-    language: string;
+   @Output() switchLanguage = new EventEmitter<string>();
 
 
   constructor(private breakpointObserver: BreakpointObserver,
-     private authService: AuthService,
-     private translate: TranslateService) {}
+              private authService: AuthService) {}
 
   ngOnInit() {
-    this.language = 'fr';
+
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
     });
@@ -36,8 +35,10 @@ export class MainNavComponent implements OnInit, OnDestroy{
 
 
   changerLanguage(language: string) {
-    this.translate.use(language);
-    this.language = language;
+    // this.translate.use(language);
+    // this.language = language;
+    this.switchLanguage.emit(language);
+
   }
   onLogout() {
     this.authService.logout();

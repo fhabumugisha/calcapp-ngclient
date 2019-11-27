@@ -1,7 +1,7 @@
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,8 +20,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { TranslationModule } from './translation/translation.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -34,7 +38,13 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     BrowserModule,
     HttpClientModule,
-    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
     TranslationModule,
     AppRoutingModule,
     BrowserAnimationsModule,
