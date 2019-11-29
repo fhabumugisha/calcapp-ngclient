@@ -19,7 +19,7 @@ export class EditCategoryComponent implements OnInit {
     })
   }
   submit(form) {
-    this.dialogRef.close(`${form.value}`);
+    this.dialogRef.close(this.form.value);
   }
 
   onNoClick(): void {
