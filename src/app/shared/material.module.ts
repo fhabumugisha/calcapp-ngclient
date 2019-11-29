@@ -20,6 +20,7 @@ import {MatSidenavModule,
   MatPaginatorModule,
   MatExpansionModule,
   MatSnackBarModule,
+  MatDialogModule,
   MatProgressSpinnerModule} from '@angular/material';
 import { DropdownDirective } from './dropdown.directive';
 
@@ -46,7 +47,8 @@ import { DropdownDirective } from './dropdown.directive';
       MatPaginatorModule,
       MatSidenavModule,
       MatProgressSpinnerModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -68,7 +70,8 @@ import { DropdownDirective } from './dropdown.directive';
       MatSidenavModule,
       MatExpansionModule,
       MatProgressSpinnerModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatDialogModule
   ]
 })
 export class MaterialModule { }

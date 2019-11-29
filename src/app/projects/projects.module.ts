@@ -10,6 +10,8 @@ import { TranslateModule, TranslateLoader, TranslateCompiler, TranslateParser, M
 import { TranslationModule } from '../translation/translation.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { EditCategoryComponent } from './edit-project/edit-category/edit-category.component';
+import { EditItemComponent } from './edit-project/edit-item/edit-item.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -19,7 +21,9 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     ProjectListComponent,
     ProjectCreateComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    EditCategoryComponent,
+    EditItemComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     TranslationModule,
   ],
-  schemas : [CUSTOM_ELEMENTS_SCHEMA ]
+  schemas : [CUSTOM_ELEMENTS_SCHEMA ],
+  entryComponents: [EditCategoryComponent,EditItemComponent]
 })
 export class ProjectsModule { }

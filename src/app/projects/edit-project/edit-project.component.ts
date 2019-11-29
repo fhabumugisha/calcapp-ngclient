@@ -3,7 +3,10 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { ProjectService } from "../project.service";
 import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 @Component({
   selector: "app-edit-project",
@@ -17,11 +20,16 @@ export class EditProjectComponent implements OnInit {
   messageAction = '';
   projectForm : FormGroup;
   panelOpenState = false;
+
+
+  editCatelogDialogRef: MatDialogRef<EditCategoryComponent>;
+  editItemDialogRef: MatDialogRef<EditItemComponent>;
   constructor(
     private projectService: ProjectService,
     private router: Router,
     private route: ActivatedRoute,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -178,6 +186,30 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
     (<FormArray>this.projectForm.get('categories')).removeAt(index);
   }
 
+
+  onEditCategoryDialog(){
+    this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
+      hasBackdrop: true
+    });
+    this.editCatelogDialogRef
+        .afterClosed()
+        .subscribe((data : {title: string, type: string}) => {
+          console.log(data );
+          (<FormArray>this.projectForm.get('categories')).push(
+            new FormGroup({
+              title: new FormControl(data.title, Validators.required),
+              type: new FormControl(data.type, Validators.required ),
+              items : new FormArray([]),
+              totalAmount : new FormControl(0)
+            })
+          );
+        });
+  }
+
+  onEditItemDialog(){
+    this.editItemDialogRef = this.dialog.open(EditItemComponent);
+
+  }
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });

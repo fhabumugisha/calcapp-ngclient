@@ -10,18 +10,21 @@
     </div>
   </div>
   <hr />
-  <div class="card-deck">
-    <div class="card" *ngFor="let project of projects">
-      <div class="card-body">
-        <h5 class="card-title">{{ project.title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ project.type }}</h6>
-        <span class="card-text"
-          >{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :
-          {{ project.totalAmount }} EUR</span
-        >
-        <p class="card-text">{{ project.description }}</p>
-      </div>
-      <div class="card-footer">
+
+  <mat-divider></mat-divider>
+  <mat-accordion>
+    <mat-expansion-panel [hideToggle]="false" *ngFor="let project of projects">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ project.title }} <span class="d-none d-sm-block text-muted">&nbsp;- {{ project.type }}</span> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description >
+          {{ project.type }}
+        </mat-panel-description>
+        <span
+        >{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :     {{ project.totalAmount }} EUR</span
+      >
+      <p>{{ project.description }}</p>
+         <mat-action-row>
           <a
           style="cursor:pointer;"
           class="card-link text-primary "
@@ -43,9 +46,11 @@
         >
           {{ "PROJECTS.DELETE" | translate }}</a
         >
-      </div>
-    </div>
-  </div>
+          </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider></mat-divider>
 
   <mat-paginator
     fxLayout="row"
