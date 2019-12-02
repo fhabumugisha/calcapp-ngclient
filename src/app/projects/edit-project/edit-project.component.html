@@ -138,46 +138,15 @@
           >
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{ categoryCtrl.value.title }}  &nbsp; - {{ categoryCtrl.value.type }}  ( {{ categoryCtrl.value.totalAmount }})
+               <h5>{{ categoryCtrl.value.title }} </h5>  &nbsp; - {{ categoryCtrl.value.type }}  ( {{ categoryCtrl.value.totalAmount | currency :'EUR' }})
               </mat-panel-title>
               <mat-panel-description class="d-none d-sm-block">
-                {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount }}
+                <!-- {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount | currency :'EUR' }} -->
               </mat-panel-description>
             </mat-expansion-panel-header>
 
+                <!-- <div class="titleActions">
 
-
-
-                        <!-- <mat-form-field>
-                          <input
-                            matInput
-                            placeholder="Title"
-                            formControlName="title"
-                            required
-                          />
-                        </mat-form-field>
-
-
-                        <mat-form-field>
-                          <mat-label>Type</mat-label>
-                          <mat-select formControlName="type" required>
-                            <mat-option
-                              *ngFor="let type of categoryTypes"
-                              [value]="type.code"
-                            >
-                              {{ type.label }}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field> -->
-
-
-
-
-
-
-                <div class="titleActions">
-                    <h5>{{ "EDIT_PROJECT.ITEMS" | translate }} ( {{getCategoryItemsControls(categoryCtrl).length}})</h5>
-                    <span class="spacer"></span>
 
                     <a
                     mat-button
@@ -186,7 +155,7 @@
                   >
                    {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
                  </a>
-                </div>
+                </div> -->
 
                 <div class="example-container mat-elevation-z8">
                     <table mat-table [dataSource]="categoryCtrl.value.items">
@@ -285,6 +254,13 @@
 
 
                   <mat-action-row>
+                      <a
+                      mat-button
+                      color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
+                      (click)="onAddCategoryItem(categoryCtrl)"
+                    >
+                     {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
+                   </a>
                       <button type="button"
                       mat-button
                       color="accent" title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
