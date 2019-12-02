@@ -37,7 +37,7 @@
     "ADD_ITEM": "Ajouter élément",
     "DELETE_ITEM": "Supprimer élément",
     "ADD_CATEGORY": "Ajouter catégorie",
-    "DELETE_CATEGORY": "Supprimer catégory",
+    "DELETE_CATEGORY": "Supprimer catégorie",
     "LOGIN": "Se connecter",
     "CREATE_PROJECT": "Créer un projet",
     "DELETE" : "Supprimer",
@@ -83,8 +83,9 @@
     "ADD_ITEM": "Ajouter élément",
     "DELETE_ITEM": "Supprimer élément",
     "ADD_CATEGORY": "Ajouter catégorie",
-    "DELETE_CATEGORY": "Supprimer catégory",
+    "DELETE_CATEGORY": "Supprimer catégorie",
     "AMOUNT" : "Montant",
-    "TOTAL_AMOUNT" : "Montant total"
+    "TOTAL_AMOUNT" : "Montant total",
+    "EDIT_CATEGORY":"Modifier catégorie"
   }
 }

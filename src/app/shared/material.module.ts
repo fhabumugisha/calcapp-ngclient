@@ -21,8 +21,11 @@ import {MatSidenavModule,
   MatExpansionModule,
   MatSnackBarModule,
   MatDialogModule,
+  MatMenuModule,
   MatProgressSpinnerModule} from '@angular/material';
 import { DropdownDirective } from './dropdown.directive';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [DropdownDirective],
@@ -48,7 +51,9 @@ import { DropdownDirective } from './dropdown.directive';
       MatSidenavModule,
       MatProgressSpinnerModule,
       MatSnackBarModule,
-      MatDialogModule
+      MatDialogModule,
+      DragDropModule,
+      MatMenuModule
   ],
   exports: [
     MatButtonModule,
@@ -71,7 +76,9 @@ import { DropdownDirective } from './dropdown.directive';
       MatExpansionModule,
       MatProgressSpinnerModule,
       MatSnackBarModule,
-      MatDialogModule
+      MatDialogModule,
+      DragDropModule,
+      MatMenuModule
   ]
 })
 export class MaterialModule { }

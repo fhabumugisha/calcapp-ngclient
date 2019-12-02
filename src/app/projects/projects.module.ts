@@ -1,7 +1,7 @@
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
@@ -41,6 +41,9 @@ export function createTranslateLoader(http: HttpClient) {
     TranslationModule,
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA ],
-  entryComponents: [EditCategoryComponent,EditItemComponent]
+  entryComponents: [EditCategoryComponent,EditItemComponent],
+  providers: [
+
+  ]
 })
 export class ProjectsModule { }

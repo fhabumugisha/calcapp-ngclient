@@ -28,6 +28,14 @@ body{margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   width: 100%;
 }
 
+.mat-expansion-panel {
+  margin-bottom: 10px !important;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
 
 
 

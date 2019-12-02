@@ -6,8 +6,7 @@ import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
-
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
   selector: "app-edit-project",
   templateUrl: "./edit-project.component.html",
@@ -21,7 +20,7 @@ export class EditProjectComponent implements OnInit {
   projectForm : FormGroup;
   panelOpenState = false;
 
-
+  displayedColumns = ['item', 'cost', 'actions'];
   editCatelogDialogRef: MatDialogRef<EditCategoryComponent>;
   editItemDialogRef: MatDialogRef<EditItemComponent>;
   constructor(
@@ -186,6 +185,10 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
     (<FormArray>this.projectForm.get('categories')).removeAt(index);
   }
 
+  onEditCategory(index: number){
+
+  }
+
 
   onEditCategoryDialog(){
     this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
@@ -193,16 +196,19 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
     });
     this.editCatelogDialogRef
         .afterClosed()
-        .subscribe((data : {title: string, type: string}) => {
-          console.log(data );
-          (<FormArray>this.projectForm.get('categories')).push(
-            new FormGroup({
-              title: new FormControl(data.title, Validators.required),
-              type: new FormControl(data.type, Validators.required ),
-              items : new FormArray([]),
-              totalAmount : new FormControl(0)
-            })
-          );
+        .subscribe((data: {title: string, type: string}) => {
+          if(data){
+            console.log(data );
+            (<FormArray>this.projectForm.get('categories')).push(
+              new FormGroup({
+                title: new FormControl(data.title, Validators.required),
+                type: new FormControl(data.type, Validators.required ),
+                items : new FormArray([]),
+                totalAmount : new FormControl(0)
+              })
+            );
+          }
+
         });
   }
 
@@ -210,7 +216,9 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
     this.editItemDialogRef = this.dialog.open(EditItemComponent);
 
   }
-
+  dropItemCtlr(event: CdkDragDrop<{ tilte: string, amount: number}[]>, items: { tilte: string, amount: number} [] ) {
+    moveItemInArray(items, event.previousIndex, event.currentIndex);
+  }
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }

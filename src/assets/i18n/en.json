@@ -85,7 +85,8 @@
     "ADD_CATEGORY": "Add category ",
     "DELETE_CATEGORY": "Delete category ",
     "AMOUNT" : "Amount",
-    "TOTAL_AMOUNT" : "Total amount"
+    "TOTAL_AMOUNT" : "Total amount",
+    "EDIT_CATEGORY":"Edit category"
 
 }
 }
