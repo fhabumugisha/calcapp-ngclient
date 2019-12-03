@@ -230,7 +230,7 @@ export class EditProjectComponent implements OnInit {
   }
 
 
-  onEditCategoryDialog(index: number){
+  onEditCategoryDialog(index?: number){
     this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
       hasBackdrop: true
     });
@@ -254,7 +254,7 @@ export class EditProjectComponent implements OnInit {
         });
   }
 
-  onEditCategoryItemDialog(categoryCtrl, index){
+  onEditCategoryItemDialog(categoryCtrl, index?:number){
     this.editItemDialogRef = this.dialog.open(EditItemComponent, {
       hasBackdrop: true
     });
