@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
@@ -14,9 +14,10 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      title: '',
-      type: '',
-    })
+      title: ['', Validators.required],
+      type: ['', Validators.required],
+
+    });
   }
   submit(form) {
     this.dialogRef.close(this.form.value);

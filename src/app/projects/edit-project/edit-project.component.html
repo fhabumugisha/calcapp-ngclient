@@ -22,6 +22,11 @@
       </mat-form-field>
 
       <mat-form-field>
+        <input matInput placeholder='{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }}' formControlName="totalAmount" required />
+      </mat-form-field>
+
+
+      <mat-form-field>
         <textarea
           matInput
           placeholder="Description"
@@ -140,22 +145,23 @@
               <mat-panel-title>
                <h5>{{ categoryCtrl.value.title }} </h5>  &nbsp; - {{ categoryCtrl.value.type }}  ( {{ categoryCtrl.value.totalAmount | currency :'EUR' }})
               </mat-panel-title>
-              <mat-panel-description class="d-none d-sm-block">
+              <mat-panel-description >
                 <!-- {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount | currency :'EUR' }} -->
+
               </mat-panel-description>
             </mat-expansion-panel-header>
 
-                <!-- <div class="titleActions">
+            <div class="titleActions">
 
 
-                    <a
-                    mat-button
-                    color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
-                    (click)="onAddCategoryItem(categoryCtrl)"
-                  >
-                   {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
-                 </a>
-                </div> -->
+              <a
+              mat-button
+              color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
+              (click)="onEditCategoryItemDialog(categoryCtrl)"
+            >
+             {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
+           </a>
+          </div>
 
                 <div class="example-container mat-elevation-z8">
                     <table mat-table [dataSource]="categoryCtrl.value.items">
@@ -180,11 +186,11 @@
                                   <mat-icon>more_vert</mat-icon>
                                 </button>
                                 <mat-menu #menu="matMenu">
-                                    <button mat-menu-item type="button">
+                                    <button mat-menu-item type="button" (click)="onEditCategoryItemDialog(categoryCtrl, i)" >
                                       <mat-icon>edit</mat-icon>
                                       <span>Edit</span>
                                     </button>
-                                    <button mat-menu-item disabled type="button">
+                                    <button mat-menu-item  type="button" (click)="onDeleteCategoryItem(categoryCtrl, i)" >
                                       <mat-icon>delete</mat-icon>
                                       <span>Delete</span>
                                     </button>
@@ -204,76 +210,24 @@
                   <mat-divider></mat-divider>
 
 
-                <!-- <div  formArrayName="items">
-                    <div
-
-                      *ngFor="
-                        let itemCtrl of getCategoryItemsControls(categoryCtrl );
-                        let i = index
-                      "
-                      [formGroupName]="i"
-                    >
-
-
-
-                        <mat-form-field>
-                          <input
-                            matInput
-                            placeholder="Title"
-                            formControlName="title"
-                            required
-                          />
-                        </mat-form-field>
-
-
-                        <mat-form-field>
-                          <input
-                            matInput
-                            placeholder="{{ 'EDIT_PROJECT.AMOUNT' | translate }}"
-                            formControlName="amount"
-                            required
-                          />
-                        </mat-form-field>
-
-
-
-                        <button
-                          mat-icon-button
-                          color="warn"
-                          (click)="
-                            onDeleteCategoryItem(categoryCtrl, i)
-                          "
-                        >
-                          <mat-icon>delete</mat-icon>
-                        </button>
-
-                      <mat-divider></mat-divider>
-                    </div>
-                  </div> -->
 
 
 
                   <mat-action-row>
-                      <a
-                      mat-button
-                      color="accent" title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
-                      (click)="onAddCategoryItem(categoryCtrl)"
-                    >
-                     {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
-                   </a>
+
                       <button type="button"
                       mat-button
-                      color="accent" title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
+                      color="accent" title=" {{ 'EDIT_PROJECT.EDIT_CATEGORY' | translate }}"
                       (click)="onEditCategory(i)"
                     >
-                      {{ "EDIT_PROJECT.EDIT_CATEGORY" | translate }}
+                      {{ "BOUTON.EDIT_PROJECT" | translate }}
                    </button>
                     <button type="button"
-                    mat-button
+                     mat-button
                     color="accent" title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
                     (click)="onDeleteCategory(i)"
                   >
-                    {{ "EDIT_PROJECT.DELETE_CATEGORY" | translate }}
+                    {{ "BOUTON.DELETE" | translate }}
                  </button>
                   </mat-action-row>
           </mat-expansion-panel>

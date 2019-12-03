@@ -42,7 +42,8 @@
     "LOGIN": "Se connecter",
     "CREATE_PROJECT": "Create a project",
     "DELETE" : "Delete",
-    "SAVE" : "Save"
+    "SAVE" : "Save",
+    "CANCEL" : "Cancel"
 
   },
 

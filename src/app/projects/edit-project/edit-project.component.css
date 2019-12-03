@@ -22,7 +22,7 @@
   align-content: center;
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 
   margin-bottom: 5px;
 }
@@ -43,4 +43,11 @@ tr.mat-footer-row {
 
 .mat-table-sticky {
   border-top: 1px solid #e0e0e0;
+}
+
+
+mat-action-row {
+
+  margin-right: 16px !important;
+
 }

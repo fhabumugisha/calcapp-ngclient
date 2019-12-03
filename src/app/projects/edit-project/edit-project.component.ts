@@ -1,18 +1,33 @@
-import { Project } from "./../project.model";
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { ProjectService } from "../project.service";
-import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
+import { Project } from './../project.model';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ProjectService } from '../project.service';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
-  selector: "app-edit-project",
-  templateUrl: "./edit-project.component.html",
-  styleUrls: ["./edit-project.component.css"]
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.css']
 })
 export class EditProjectComponent implements OnInit {
+  constructor(
+    private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
+
+
+  get itemsControls() {
+    return (this.projectForm.get('items') as FormArray).controls;
+  }
+  get categoriesControls() {
+    return (this.projectForm.get('categories') as FormArray).controls;
+  }
   id: string;
   editMode = false;
   project: Project;
@@ -23,13 +38,40 @@ export class EditProjectComponent implements OnInit {
   displayedColumns = ['item', 'cost', 'actions'];
   editCatelogDialogRef: MatDialogRef<EditCategoryComponent>;
   editItemDialogRef: MatDialogRef<EditItemComponent>;
-  constructor(
-    private projectService: ProjectService,
-    private router: Router,
-    private route: ActivatedRoute,
-    public snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) {}
+
+
+
+
+  projectTypes = [
+    {
+      code: "other",
+      label: "Other"
+    },
+    {
+      code: "budget",
+      label: "Budget"
+    },
+    {
+      code: "purchase",
+      label: "Purchase"
+    }
+  ];
+
+  categoryTypes = [
+    {
+      code: "other",
+      label: "Other"
+    },
+    {
+      code: "income",
+      label: "Income"
+    },
+    {
+      code: "expenses",
+      label: "Expenses"
+    }
+  ];
+
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -52,13 +94,14 @@ export class EditProjectComponent implements OnInit {
     let title = '';
     let type = '';
     let description = '';
+    let totalAmount = 0;
     const itemsControls = new FormArray([]);
     const categoriesControls = new FormArray([]);
 
     title = this.project.title;
     type = this.project.type;
     description = this.project.description;
-
+    totalAmount = this.project.totalAmount;
 
     if (this.project['items']) {
       for (const item of this.project.items) {
@@ -101,6 +144,7 @@ export class EditProjectComponent implements OnInit {
       title: new FormControl(title, Validators.required),
       type: new FormControl( {value: type, disabled: true} , Validators.required),
       description: new FormControl(description, Validators.required),
+      totalAmount: new FormControl({value: totalAmount, disabled: true}, Validators.required),
       items: itemsControls,
       categories: categoriesControls,
     });
@@ -112,10 +156,9 @@ export class EditProjectComponent implements OnInit {
     this.projectService.updateProject(this.id, this.projectForm.value).subscribe(data => {
       this.project =  data.project;
       this.messageAction = data.message;
-      this.panelOpenState =  false;
-    this.openSnackBar(this.messageAction, "Ok");
-   // this.router.navigate(['../projects',this.project._id, 'edit']);
-    this.ngOnInit();
+     // this.panelOpenState =  false;
+      this.openSnackBar(this.messageAction, 'Ok');
+      this.initForm();
 
     });
 
@@ -125,14 +168,6 @@ export class EditProjectComponent implements OnInit {
        duration: 2000,
     });
  }
-
-
-  get itemsControls() {
-    return (this.projectForm.get('items') as FormArray).controls;
-  }
-  get categoriesControls() {
-    return (this.projectForm.get('categories') as FormArray).controls;
-  }
 
   getCategoryItemsControls(categoryCtrl){
   return (categoryCtrl.get('items') as FormArray).controls;
@@ -153,36 +188,41 @@ export class EditProjectComponent implements OnInit {
 
   onDeleteItem(index: number) {
     (<FormArray>this.projectForm.get('items')).removeAt(index);
+    this.onSubmit();
   }
 
-  onAddCategory() {
-    (<FormArray>this.projectForm.get('categories')).push(
-      new FormGroup({
-        title: new FormControl('New category', Validators.required),
-        type: new FormControl(null, Validators.required ),
-        items : new FormArray([]),
-        totalAmount : new FormControl(0)
-      })
-    );
-  }
+  // onAddCategory() {
+  //   (<FormArray>this.projectForm.get('categories')).push(
+  //     new FormGroup({
+  //       title: new FormControl('New category', Validators.required),
+  //       type: new FormControl(null, Validators.required ),
+  //       items : new FormArray([]),
+  //       totalAmount : new FormControl(0)
+  //     })
+  //   );
+  // }
 
 
-  onAddCategoryItem(categoryCtrl){
-    categoryCtrl.get("items").push( new FormGroup({
-      title: new FormControl(null, Validators.required),
-      amount: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/)
-      ])
-    }));
-  }
-onDeleteCategoryItem(categoryCtrl,index: number) {
+  // onAddCategoryItem(categoryCtrl){
+  //   categoryCtrl.get("items").push( new FormGroup({
+  //     title: new FormControl(null, Validators.required),
+  //     amount: new FormControl(null, [
+  //       Validators.required,
+  //       Validators.pattern(/^[1-9]+[0-9]*$/)
+  //     ])
+  //   }));
+  // }
+
+ onDeleteCategoryItem(categoryCtrl, index: number) {
   categoryCtrl.get('items').removeAt(index);
+  this.onSubmit();
+
   }
 
 
   onDeleteCategory(index: number) {
     (<FormArray>this.projectForm.get('categories')).removeAt(index);
+    this.onSubmit();
   }
 
   onEditCategory(index: number){
@@ -190,7 +230,7 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
   }
 
 
-  onEditCategoryDialog(){
+  onEditCategoryDialog(index: number){
     this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
       hasBackdrop: true
     });
@@ -198,7 +238,7 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
         .afterClosed()
         .subscribe((data: {title: string, type: string}) => {
           if(data){
-            console.log(data );
+
             (<FormArray>this.projectForm.get('categories')).push(
               new FormGroup({
                 title: new FormControl(data.title, Validators.required),
@@ -207,48 +247,41 @@ onDeleteCategoryItem(categoryCtrl,index: number) {
                 totalAmount : new FormControl(0)
               })
             );
+            this.onSubmit();
+
           }
 
         });
   }
 
-  onEditItemDialog(){
-    this.editItemDialogRef = this.dialog.open(EditItemComponent);
+  onEditCategoryItemDialog(categoryCtrl, index){
+    this.editItemDialogRef = this.dialog.open(EditItemComponent, {
+      hasBackdrop: true
+    });
+    this.editItemDialogRef
+    .afterClosed()
+    .subscribe((data: {title: string, amount: number}) => {
+      if(data){
 
+        categoryCtrl.get("items").push( new FormGroup({
+          title: new FormControl(data.title, Validators.required),
+          amount: new FormControl(data.amount, [
+            Validators.required,
+            Validators.pattern(/^[1-9]+[0-9]*$/)
+          ])
+        }));
+
+        this.onSubmit();
+      }
+
+    });
   }
-  dropItemCtlr(event: CdkDragDrop<{ tilte: string, amount: number}[]>, items: { tilte: string, amount: number} [] ) {
-    moveItemInArray(items, event.previousIndex, event.currentIndex);
-  }
+
+
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-  projectTypes = [
-    {
-      code: "other",
-      label: "Other"
-    },
-    {
-      code: "budget",
-      label: "Budget"
-    },
-    {
-      code: "purchase",
-      label: "Purchase"
-    }
-  ];
-
-  categoryTypes = [
-    {
-      code: "other",
-      label: "Other"
-    },
-    {
-      code: "income",
-      label: "Income"
-    },
-    {
-      code: "expenses",
-      label: "Expenses"
-    }
-  ];
 }
+
+
+

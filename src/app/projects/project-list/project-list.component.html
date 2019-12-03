@@ -15,7 +15,7 @@
   <mat-accordion>
     <mat-expansion-panel [hideToggle]="false" *ngFor="let project of projects">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{ project.title }} <span class="d-none d-sm-block text-muted">&nbsp;- {{ project.type }}</span> </mat-panel-title>
+          <mat-panel-title><h5>{{ project.title }}</h5>  <span class=" text-muted">&nbsp;- {{ project.type }}</span> </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-panel-description >
           {{ project.type }}
