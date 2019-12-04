@@ -1,3 +1,4 @@
+import { Category } from './../category.model';
 import { Item } from './../item.model';
 import { Project } from './../project.model';
 import { Component, OnInit } from '@angular/core';
@@ -108,7 +109,6 @@ export class EditProjectComponent implements OnInit {
       for (const item of this.project.items) {
         itemsControls.push(
           new FormGroup({
-            _id : new FormControl(item._id),
             title: new FormControl(item.title, Validators.required),
             amount: new FormControl(item.amount, [
               Validators.required,
@@ -143,7 +143,6 @@ export class EditProjectComponent implements OnInit {
     }
 
     this.projectForm = new FormGroup({
-      _id : new FormControl(this.project._id),
       title: new FormControl(title, Validators.required),
       type: new FormControl( {value: type, disabled: true} , Validators.required),
       description: new FormControl(description, Validators.required),
@@ -207,26 +206,34 @@ export class EditProjectComponent implements OnInit {
     this.onSubmit();
   }
 
-  onEditCategory(index: number) {
-
-  }
 
 
-  onEditCategoryDialog(index?: number) {
+  onEditCategoryDialog(index?: number, categoryCtrl?) {
+
+
     this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
-      hasBackdrop: true
+      hasBackdrop: true,
+      data : {
+        title : categoryCtrl ? categoryCtrl.value.title : '',
+        type : categoryCtrl ? categoryCtrl.value.type : ''
+      }
     });
     this.editCatelogDialogRef
         .afterClosed()
-        .subscribe((data: {title: string, type: string}) => {
-          if (data) {
+        .subscribe((categoryFormData: {title: string, type: string}) => {
+          if (categoryFormData) {
 
+            if (index !== undefined) {
+              ( this.projectForm.get('categories') as FormArray).removeAt(index);
+              console.log(( this.projectForm.get('categories') as FormArray));
+
+            }
             ( this.projectForm.get('categories') as FormArray).push(
               new FormGroup({
-                title: new FormControl(data.title, Validators.required),
-                type: new FormControl(data.type, Validators.required ),
-                items : new FormArray([]),
-                totalAmount : new FormControl(0)
+                title: new FormControl(categoryFormData.title, Validators.required),
+                type: new FormControl(categoryFormData.type, Validators.required ),
+                items : categoryCtrl ? categoryCtrl.get('items') : new FormArray([]),
+                totalAmount : categoryCtrl ? new FormControl(categoryCtrl.value.totalAmount ) : new FormControl(0)
               })
             );
             this.onSubmit();
@@ -237,8 +244,6 @@ export class EditProjectComponent implements OnInit {
   }
 
   onEditCategoryItemDialog(categoryCtrl, indexItem?: number, item?: Item) {
-
-    console.log('indexItem :', indexItem);
     this.editItemDialogRef = this.dialog.open(EditItemComponent, {
       hasBackdrop: true,
       data : {
@@ -247,12 +252,13 @@ export class EditProjectComponent implements OnInit {
         amount : item ? item.amount : ''
       }
     });
+
     this.editItemDialogRef
     .afterClosed()
     .subscribe((itemFormData: {_id: string, title: string, amount: number}) => {
       if (itemFormData) {
 
-        if(indexItem){
+        if (indexItem !== undefined) {
           categoryCtrl.get('items').removeAt(indexItem);
         }
         categoryCtrl.get('items').push( new FormGroup({
@@ -260,7 +266,7 @@ export class EditProjectComponent implements OnInit {
           title: new FormControl(itemFormData.title, Validators.required),
           amount: new FormControl(itemFormData.amount, [
             Validators.required,
-            Validators.pattern(/^[1-9]+[0-9]*$/)
+            Validators.pattern(/^\d+\.\d{0,2}$/)
           ])
         }));
 

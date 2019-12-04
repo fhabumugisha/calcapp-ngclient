@@ -14,7 +14,7 @@ export class EditCategoryComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
+      this.form = this.formBuilder.group({
       title: [this.data ?  this.data.title : '', Validators.required],
       type: [this.data ? this.data.type : '', Validators.required],
 
