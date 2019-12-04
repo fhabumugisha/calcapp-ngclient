@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-edit-category',
@@ -10,12 +10,13 @@ import { MatDialogRef } from '@angular/material';
 export class EditCategoryComponent implements OnInit {
   form: FormGroup;
   constructor(private formBuilder: FormBuilder,
-              private dialogRef: MatDialogRef<EditCategoryComponent>) { }
+              private dialogRef: MatDialogRef<EditCategoryComponent>,
+              @Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      type: ['', Validators.required],
+      title: [this.data ?  this.data.title : '', Validators.required],
+      type: [this.data ? this.data.type : '', Validators.required],
 
     });
   }

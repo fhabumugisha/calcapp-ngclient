@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-edit-item',
   templateUrl: './edit-item.component.html',
@@ -10,12 +10,15 @@ export class EditItemComponent implements OnInit {
 
   form: FormGroup;
   constructor(private formBuilder: FormBuilder,
-              private dialogRef: MatDialogRef<EditItemComponent>) { }
+              private dialogRef: MatDialogRef<EditItemComponent>,
+              @Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
+    console.log(this.data._id );
     this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      amount: ['', [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
+      _id: [this.data ? this.data._id : ''],
+      title: [this.data ? this.data.title : '', Validators.required],
+      amount: [this.data ? this.data.amount : '', [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
     });
   }
   submit(form) {
