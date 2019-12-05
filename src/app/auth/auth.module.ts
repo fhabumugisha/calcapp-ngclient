@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationModule } from '../translation/translation.module';
+import { ErrorDialogComponent } from '../shared/error/error-dialog/error-dialog.component';
 
 const authRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ const authRoutes: Routes = [
     TranslateModule,
     TranslationModule,
   ],
-  schemas : [CUSTOM_ELEMENTS_SCHEMA ]
+  schemas : [CUSTOM_ELEMENTS_SCHEMA ],
+  entryComponents: [ ErrorDialogComponent]
 })
 export class AuthModule { }

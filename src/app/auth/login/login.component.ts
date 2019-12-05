@@ -1,7 +1,9 @@
+import { ErrorDialogComponent } from './../../shared/error/error-dialog/error-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,8 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -27,9 +30,17 @@ export class LoginComponent implements OnInit {
       resData => {
         this.router.navigate(['/projects']);
       },
-      errorMessage => {
-        console.log(errorMessage);
+      errorData => {
+        console.log(errorData.message);
+
         this.isLoading = false;
+        this.dialog.open(ErrorDialogComponent, {
+          hasBackdrop: true,
+          data : {
+            message : errorData.message,
+            data : errorData.data
+          }
+        });
 
       }
     );

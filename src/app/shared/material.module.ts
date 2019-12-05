@@ -25,10 +25,11 @@ import {MatSidenavModule,
   MatProgressSpinnerModule} from '@angular/material';
 import { DropdownDirective } from './dropdown.directive';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ErrorDialogComponent } from './error/error-dialog/error-dialog.component';
 
 
 @NgModule({
-  declarations: [DropdownDirective],
+  declarations: [DropdownDirective, ErrorDialogComponent],
   imports: [
     CommonModule,
       MatButtonModule,

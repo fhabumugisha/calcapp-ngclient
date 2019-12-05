@@ -81,11 +81,12 @@ export class AuthService {
   private handleError(errorRes: HttpErrorResponse) {
     const errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.message) {
-      return throwError(errorMessage);
+      return throwError( { message : errorMessage} );
     }
-    console.log(errorRes.error.message);
 
-    return throwError(errorRes.error.message);
+    console.log(errorRes.error);
+
+    return throwError(errorRes.error);
   }
 
 

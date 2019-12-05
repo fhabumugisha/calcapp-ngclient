@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ErrorDialogComponent } from 'src/app/shared/error/error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,8 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   isLoading = false;
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -31,9 +34,16 @@ export class SignupComponent implements OnInit {
 
         this.router.navigate(['/auth/login']);
       },
-      (error) => {
-        console.log(error);
+      (errorData) => {
+        console.log(errorData.message);
         this.isLoading = false;
+        this.dialog.open(ErrorDialogComponent, {
+          hasBackdrop: true,
+          data : {
+            message : errorData.message,
+            data : errorData.data
+          }
+        });
       }
     );
 

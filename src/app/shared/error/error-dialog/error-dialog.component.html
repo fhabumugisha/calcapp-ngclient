@@ -1,0 +1,15 @@
+
+<h1 matDialogTitle>Error</h1>
+
+<mat-dialog-content>
+    {{message}}
+    <hr>
+    <ul *ngFor="let item of errorData | keyvalue ">
+      <li>{{item.key}} : {{item.value.toString()}}</li>
+    </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions [attr.align]="start">
+    <button mat-button matDialogClose>Okey</button>
+
+</mat-dialog-actions>

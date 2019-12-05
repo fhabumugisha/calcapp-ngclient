@@ -8,7 +8,7 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-edit-project',
   templateUrl: './edit-project.component.html',
