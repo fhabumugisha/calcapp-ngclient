@@ -18,7 +18,7 @@ export class EditItemComponent implements OnInit {
     this.form = this.formBuilder.group({
       _id: [this.data ? this.data._id : ''],
       title: [this.data ? this.data.title : '', Validators.required],
-      amount: [this.data ? this.data.amount : '', [Validators.required, Validators.pattern(/^\d+\.\d{0,2}$/)]],
+      amount: [this.data ? this.data.amount : '', [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)]],
     });
   }
   submit(form) {

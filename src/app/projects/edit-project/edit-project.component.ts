@@ -41,8 +41,11 @@ export class EditProjectComponent implements OnInit {
   editCatelogDialogRef: MatDialogRef<EditCategoryComponent>;
   editItemDialogRef: MatDialogRef<EditItemComponent>;
 
+  indexOpenedCateg: any;
 
-
+  setIndexOpenedCateg(index: any){
+    this.indexOpenedCateg = index;
+  }
 
   projectTypes = [
     {
@@ -112,7 +115,7 @@ export class EditProjectComponent implements OnInit {
             title: new FormControl(item.title, Validators.required),
             amount: new FormControl(item.amount, [
               Validators.required,
-              Validators.pattern(/^[1-9]+[0-9]*$/)
+              Validators.pattern(/^\d+\.?\d{0,2}$/)
             ])
           })
         );
@@ -126,7 +129,7 @@ export class EditProjectComponent implements OnInit {
             categoryItems.push(
             new FormGroup({
               title: new FormControl(item.title, Validators.required),
-              amount: new FormControl(item.amount, Validators.required)
+              amount: new FormControl(item.amount, [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)])
             })
           );
           }
@@ -160,7 +163,7 @@ export class EditProjectComponent implements OnInit {
       this.messageAction = data.message;
      // this.panelOpenState =  false;
       this.openSnackBar(this.messageAction, 'Ok');
-      this.initForm();
+     this.initForm();
 
     });
 
@@ -176,17 +179,6 @@ export class EditProjectComponent implements OnInit {
   }
 
 
-  onAddItem() {
-    ( this.projectForm.get('items') as FormArray).push(
-      new FormGroup({
-        title: new FormControl(null, Validators.required),
-        amount: new FormControl(null, [
-          Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)
-        ])
-      })
-    );
-  }
 
   onDeleteItem(index: number) {
     ( this.projectForm.get('items') as FormArray).removeAt(index);
@@ -197,7 +189,6 @@ export class EditProjectComponent implements OnInit {
  onDeleteCategoryItem(categoryCtrl, index: number) {
   categoryCtrl.get('items').removeAt(index);
   this.onSubmit();
-
   }
 
 
@@ -209,8 +200,6 @@ export class EditProjectComponent implements OnInit {
 
 
   onEditCategoryDialog(index?: number, categoryCtrl?) {
-
-
     this.editCatelogDialogRef = this.dialog.open(EditCategoryComponent, {
       hasBackdrop: true,
       data : {
@@ -225,7 +214,7 @@ export class EditProjectComponent implements OnInit {
 
             if (index !== undefined) {
               ( this.projectForm.get('categories') as FormArray).removeAt(index);
-              console.log(( this.projectForm.get('categories') as FormArray));
+              this.indexOpenedCateg = index;
 
             }
             ( this.projectForm.get('categories') as FormArray).push(
@@ -253,6 +242,8 @@ export class EditProjectComponent implements OnInit {
       }
     });
 
+
+
     this.editItemDialogRef
     .afterClosed()
     .subscribe((itemFormData: {_id: string, title: string, amount: number}) => {
@@ -266,7 +257,7 @@ export class EditProjectComponent implements OnInit {
           title: new FormControl(itemFormData.title, Validators.required),
           amount: new FormControl(itemFormData.amount, [
             Validators.required,
-            Validators.pattern(/^\d+\.\d{0,2}$/)
+            Validators.pattern(/^\d+\.?\d{0,2}$/)
           ])
         }));
 
@@ -276,6 +267,40 @@ export class EditProjectComponent implements OnInit {
     });
   }
 
+  onEditProjectItemDialog( indexItem?: number, item?: Item) {
+    console.log('item : ', item);
+
+    this.editItemDialogRef = this.dialog.open(EditItemComponent, {
+      hasBackdrop: false,
+      data : {
+        _id: item ? item._id : '',
+        title : item ? item.title : '',
+        amount : item ? item.amount : ''
+      }
+    });
+
+    this.editItemDialogRef
+    .afterClosed()
+    .subscribe((itemFormData: {_id: string, title: string, amount: number}) => {
+      if (itemFormData) {
+
+        if (indexItem !== undefined) {
+          ( this.projectForm.get('items') as FormArray).removeAt(indexItem);
+        }
+        ( this.projectForm.get('items') as FormArray).push( new FormGroup({
+
+          title: new FormControl(itemFormData.title, Validators.required),
+          amount: new FormControl(itemFormData.amount, [
+            Validators.required,
+            Validators.pattern(/^\d+\.?\d{0,2}$/)
+          ])
+        }));
+
+        this.onSubmit();
+      }
+
+    });
+  }
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
