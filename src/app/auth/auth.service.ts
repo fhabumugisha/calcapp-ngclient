@@ -44,9 +44,7 @@ export class AuthService {
       confirmPassword: confirmPassword
     }
     return this.http.post(this.baseApiUrl + '/auth/signup', body, this.httpOptions   )
-    .pipe(
-      catchError(this.handleError)
-    );
+    .pipe(catchError(this.handleError));
 
   }
 
@@ -82,11 +80,12 @@ export class AuthService {
 
   private handleError(errorRes: HttpErrorResponse) {
     const errorMessage = 'An unknown error occurred!';
-    if (!errorRes.error || !errorRes.error.error) {
+    if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
     }
-    console.log(errorRes.error);
-    return throwError(errorRes.error.error);
+    console.log(errorRes.error.message);
+
+    return throwError(errorRes.error.message);
   }
 
 

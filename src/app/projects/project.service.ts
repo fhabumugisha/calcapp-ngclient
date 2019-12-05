@@ -98,10 +98,10 @@ export class ProjectService {
 
   private handleError(errorRes: HttpErrorResponse) {
     const errorMessage = "An unknown error occurred!";
-    if (!errorRes.error || !errorRes.error.error) {
+    if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
     }
 
-    return throwError(errorRes.error.error);
+    return throwError(errorRes.error.message);
   }
 }

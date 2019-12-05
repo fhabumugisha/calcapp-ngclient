@@ -27,6 +27,8 @@ export class SignupComponent implements OnInit {
     const confirmPassword = signupForm.value.confirmPassword;
     this.authService.signup(email, password, confirmPassword).subscribe(
       (data) => {
+        console.log('success');
+
         this.router.navigate(['/auth/login']);
       },
       (error) => {
