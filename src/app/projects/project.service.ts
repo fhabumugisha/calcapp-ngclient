@@ -104,4 +104,41 @@ export class ProjectService {
 
     return throwError(errorRes.error.message);
   }
+
+  categoryTypes = [
+    {
+      code: 'Other',
+      label: 'Other'
+    },
+    {
+      code: 'Income',
+      label: 'Income'
+    },
+    {
+      code: 'Expenses',
+      label: 'Expenses'
+    }
+  ];
+
+  getCategoryTypes() {
+    return this.categoryTypes;
+  }
+
+  projectTypes =  [
+    {
+      code: 'Other',
+      label: 'Other'
+    },
+    {
+      code: 'Budget',
+      label: 'Budget'
+    },
+    {
+      code: 'Cost',
+      label: 'Cost'
+    }
+  ];
+  getProjectTypes(){
+    return this.projectTypes;
+  }
 }

@@ -3,6 +3,8 @@ import { ProjectService } from './../project.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from 'src/app/shared/error/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-project-create',
@@ -10,24 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-create.component.css']
 })
 export class ProjectCreateComponent implements OnInit {
-  projectTypes = [
-    {
-      code:'other',
-      label: 'Other'
-    },
-    {
-      code:'budget',
-      label: 'Budget'
-    }
-    ,
-    {
-      code:'purchase',
-      label: 'Purchase'
-    }
-  ];
 
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+
+  constructor(private projectService: ProjectService,
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -35,7 +25,7 @@ export class ProjectCreateComponent implements OnInit {
   }
 
 
-  onSubmit(createProjectForm: NgForm){
+  onSubmit(createProjectForm: NgForm) {
 
     if (!createProjectForm.valid) {
       return;
@@ -46,8 +36,15 @@ export class ProjectCreateComponent implements OnInit {
       resData => {
         this.router.navigate(['/projects']);
       },
-      errorMessage => {
-        console.log(errorMessage);
+      errorData => {
+        console.log(errorData.message);
+        this.dialog.open(ErrorDialogComponent, {
+          hasBackdrop: true,
+          data : {
+            message : errorData.message,
+            data : errorData.data
+          }
+        });
 
       }
     );
@@ -55,4 +52,11 @@ export class ProjectCreateComponent implements OnInit {
     createProjectForm.reset();
 
   }
+
+  get projectTypes() {
+    return this.projectService.getProjectTypes();
+  }
+
+
+
 }

@@ -18,7 +18,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   projects: Project[] = [];
   totalProjects = 0;
-  projectsPerPage = 2;
+  projectsPerPage = 5;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   constructor(private projectService: ProjectService,
@@ -27,16 +27,13 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.projectService.getProjects(this.projectsPerPage, this.currentPage).subscribe((data : {projects: Project[], totalItems: number}) => {
+    this.projectService.getProjects(this.projectsPerPage, this.currentPage)
+    .subscribe((data : {projects: Project[], totalItems: number}) => {
       this.projects = data.projects;
       this.totalProjects = data.totalItems;
 
     });
-    // this.subscription =   this.projectService.recipesChanged.subscribe(
-    //   (projects: Project[]) => {
-    //       this.projects = projects;
-    //   }
-    // );
+
   }
 
   onEdit(projectId: string) {
@@ -46,6 +43,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   onDelete(projectId: string) {
     this.projectService.deleteProject(projectId).subscribe(result => {
       this.projects = this.projects.filter(p => p._id !== projectId);
+      this.totalProjects = this.totalProjects - 1;
       this.openSnackBar(result.message, 'Ok');
     //   this.projectService.getProjects(this.projectsPerPage, this.currentPage)
     // .subscribe((data : {projects: Project[], totalItems: number}) => {

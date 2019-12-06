@@ -4,12 +4,12 @@
 <mat-dialog-content>
     {{message}}
     <hr>
-    <ul *ngFor="let item of errorData | keyvalue ">
-      <li>{{item.key}} : {{item.value.toString()}}</li>
+    <ul *ngFor="let item of errorData  ">
+      <li>{{item}} </li>
     </ul>
 </mat-dialog-content>
 
-<mat-dialog-actions [attr.align]="start">
-    <button mat-button matDialogClose>Okey</button>
+<mat-dialog-actions >
+    <button mat-button matDialogClose>Ok</button>
 
 </mat-dialog-actions>

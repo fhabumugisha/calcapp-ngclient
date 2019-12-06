@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ProjectService } from '../../project.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -11,7 +12,8 @@ export class EditCategoryComponent implements OnInit {
   form: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<EditCategoryComponent>,
-              @Inject(MAT_DIALOG_DATA) private data) { }
+              @Inject(MAT_DIALOG_DATA) private data,
+              private projectService: ProjectService) { }
 
   ngOnInit() {
       this.form = this.formBuilder.group({
@@ -27,18 +29,7 @@ export class EditCategoryComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  categoryTypes = [
-    {
-      code: "other",
-      label: "Other"
-    },
-    {
-      code: "income",
-      label: "Income"
-    },
-    {
-      code: "expenses",
-      label: "Expenses"
-    }
-  ];
+  get categoryTypes() {
+    return this.projectService.getCategoryTypes();
+  }
 }

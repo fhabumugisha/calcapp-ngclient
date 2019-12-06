@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './error/error-dialog/error-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -23,13 +24,11 @@ import {MatSidenavModule,
   MatDialogModule,
   MatMenuModule,
   MatProgressSpinnerModule} from '@angular/material';
-import { DropdownDirective } from './dropdown.directive';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import { ErrorDialogComponent } from './error/error-dialog/error-dialog.component';
+
 
 
 @NgModule({
-  declarations: [DropdownDirective, ErrorDialogComponent],
+  declarations: [ ErrorDialogComponent],
   imports: [
     CommonModule,
       MatButtonModule,
@@ -53,8 +52,12 @@ import { ErrorDialogComponent } from './error/error-dialog/error-dialog.componen
       MatProgressSpinnerModule,
       MatSnackBarModule,
       MatDialogModule,
-      DragDropModule,
-      MatMenuModule
+      MatMenuModule,
+      MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -78,8 +81,12 @@ import { ErrorDialogComponent } from './error/error-dialog/error-dialog.componen
       MatProgressSpinnerModule,
       MatSnackBarModule,
       MatDialogModule,
-      DragDropModule,
-      MatMenuModule
+      MatMenuModule,
+      MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

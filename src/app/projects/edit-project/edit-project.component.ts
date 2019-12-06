@@ -1,4 +1,4 @@
-import { Category } from './../category.model';
+
 import { Item } from './../item.model';
 import { Project } from './../project.model';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +8,7 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { ErrorDialogComponent } from 'src/app/shared/error/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-edit-project',
@@ -24,12 +25,7 @@ export class EditProjectComponent implements OnInit {
   ) {}
 
 
-  get itemsControls() {
-    return (this.projectForm.get('items') as FormArray).controls;
-  }
-  get categoriesControls() {
-    return (this.projectForm.get('categories') as FormArray).controls;
-  }
+
   id: string;
   editMode = false;
   project: Project;
@@ -46,36 +42,19 @@ export class EditProjectComponent implements OnInit {
   setIndexOpenedCateg(index: any){
     this.indexOpenedCateg = index;
   }
+  get itemsControls() {
+    return (this.projectForm.get('items') as FormArray).controls;
+  }
+  get categoriesControls() {
+    return (this.projectForm.get('categories') as FormArray).controls;
+  }
+  get projectTypes() {
+    return this.projectService.getProjectTypes();
+  }
 
-  projectTypes = [
-    {
-      code: 'other',
-      label: 'Other'
-    },
-    {
-      code: 'budget',
-      label: 'Budget'
-    },
-    {
-      code: 'purchase',
-      label: 'Purchase'
-    }
-  ];
-
-  categoryTypes = [
-    {
-      code: 'other',
-      label: 'Other'
-    },
-    {
-      code: 'income',
-      label: 'Income'
-    },
-    {
-      code: 'expenses',
-      label: 'Expenses'
-    }
-  ];
+  get categoryTypes() {
+    return this.projectService.getCategoryTypes();
+  }
 
 
   ngOnInit() {
@@ -158,14 +137,26 @@ export class EditProjectComponent implements OnInit {
 
   onSubmit() {
     console.log(this.projectForm.value);
-    this.projectService.updateProject(this.id, this.projectForm.value).subscribe(data => {
+    this.projectService.updateProject(this.id, this.projectForm.value)
+    .subscribe(data => {
       this.project =  data.project;
       this.messageAction = data.message;
-     // this.panelOpenState =  false;
       this.openSnackBar(this.messageAction, 'Ok');
-     this.initForm();
+      this.initForm();
 
-    });
+    },
+    errorData => {
+      console.log(errorData.message);
+      this.dialog.open(ErrorDialogComponent, {
+          hasBackdrop: true,
+          data : {
+            message : errorData.message,
+            data : errorData.data
+          }
+        });
+    }
+
+    );
 
   }
   openSnackBar(message: string, action: string) {
@@ -305,6 +296,9 @@ export class EditProjectComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
+
+
 }
 
 
