@@ -87,6 +87,7 @@
     "DELETE_CATEGORY": "Supprimer catégorie",
     "AMOUNT" : "Montant",
     "TOTAL_AMOUNT" : "Montant total",
-    "EDIT_CATEGORY":"Modifier catégorie"
+    "EDIT_CATEGORY":"Modifier catégorie",
+    "TOTAL" : "Total"
   }
 }
