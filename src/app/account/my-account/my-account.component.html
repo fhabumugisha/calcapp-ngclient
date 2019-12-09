@@ -1,0 +1,15 @@
+<mat-spinner *ngIf="isLoading" mx-auto></mat-spinner>
+<div class="card mx-auto example-container" *ngIf="!isLoading">
+  <div class="card-header">
+    {{ "MY_ACCOUNT.TITLE" | translate }}
+  </div>
+  <div class="card-body">
+       Email :  {{user.email}}
+
+  </div>
+
+  <div class="card-footer">
+
+    <button mat-raised-button color="warn" (click)="onDelete()">  {{ "MY_ACCOUNT.DELETE" | translate }}</button>
+  </div>
+</div>

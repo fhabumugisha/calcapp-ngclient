@@ -9,8 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ErrorDialogComponent implements OnInit {
   message = "An error occured";
   errorData =  [];
-  constructor( private dialogRef: MatDialogRef<ErrorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data) { }
+  constructor(@Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
     this.message =  this.data ?  this.data.message : "An error occured" ;

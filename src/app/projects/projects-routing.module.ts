@@ -6,11 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 
 const routes: Routes = [
-    { path: '', component: ProjectListComponent, canActivate: [AuthGuard],
-    //   children: [
-    //   { path: 'new', component: ProjectCreateComponent, canActivate: [AuthGuard] },
-    // ]
-  },
+    { path: '', component: ProjectListComponent, canActivate: [AuthGuard]  },
   { path: 'new', component: ProjectCreateComponent, canActivate: [AuthGuard] },
   { path: ':id/edit', component: EditProjectComponent, canActivate: [AuthGuard] },
 ];

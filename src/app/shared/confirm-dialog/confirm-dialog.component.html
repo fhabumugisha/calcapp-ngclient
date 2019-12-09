@@ -1,0 +1,12 @@
+
+<h1 matDialogTitle>Confirm</h1>
+
+<mat-dialog-content>
+ Are you sure , you want to delete {{elementToDelete}}?
+</mat-dialog-content>
+
+<mat-dialog-actions >
+
+    <button mat-button matDialogClose>No, don't delete </button>
+    <button mat-button color="warn" (click)="onConfirm(true)">Yes, delete </button>
+</mat-dialog-actions>

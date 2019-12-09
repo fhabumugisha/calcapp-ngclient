@@ -26,7 +26,8 @@
     "PROJECTS": "My projects",
     "LOGIN": "Login",
     "SIGNUP": "Sign up",
-    "LOGOUT": "Sign out"
+    "LOGOUT": "Sign out",
+    "ACCOUNT" :"My account"
 
   },
   "BOUTON": {
@@ -90,5 +91,10 @@
     "EDIT_CATEGORY":"Edit category",
     "TOTAL" : "Total"
 
+},
+
+"MY_ACCOUNT" : {
+  "TITLE" : "My account",
+  "DELETE" : "Delete account"
 }
 }

@@ -19,7 +19,15 @@
       >
         {{ "MENUS.PROJECTS" | translate }}
       </a>
-
+      <a
+      mat-list-item
+      (click)="drawer.toggle()"
+      routerLink="account"
+      routerLinkActive="active"
+      *ngIf="isAuthenticated"
+    >
+      {{ "MENUS.ACCOUNT" | translate }}
+    </a>
       <a
         mat-list-item
         (click)="drawer.toggle()"
@@ -79,7 +87,13 @@
         >
           {{ "MENUS.PROJECTS" | translate }}
         </a>
-
+        <a
+        routerLink="account"
+        routerLinkActive="active"
+        *ngIf="isAuthenticated"
+      >
+        {{ "MENUS.ACCOUNT" | translate }}
+      </a>
         <a
           routerLink="auth/login"
           routerLinkActive="active"

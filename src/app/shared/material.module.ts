@@ -24,11 +24,12 @@ import {MatSidenavModule,
   MatDialogModule,
   MatMenuModule,
   MatProgressSpinnerModule} from '@angular/material';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 
 @NgModule({
-  declarations: [ ErrorDialogComponent],
+  declarations: [ ErrorDialogComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
       MatButtonModule,

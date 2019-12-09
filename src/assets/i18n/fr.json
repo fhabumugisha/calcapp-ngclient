@@ -26,7 +26,8 @@
     "PROJECTS": "Mes projets",
     "LOGIN": "Se connecter",
     "SIGNUP": "Créer un compter",
-    "LOGOUT": "Se déconnecter"
+    "LOGOUT": "Se déconnecter",
+    "ACCOUNT" :"Mon compte"
 
   },
   "BOUTON": {
@@ -89,5 +90,10 @@
     "TOTAL_AMOUNT" : "Montant total",
     "EDIT_CATEGORY":"Modifier catégorie",
     "TOTAL" : "Total"
-  }
+  },
+
+"MY_ACCOUNT" : {
+  "TITLE" : "Mon compte",
+  "DELETE" : "Supprimer compte"
+}
 }

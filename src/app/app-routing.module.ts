@@ -1,3 +1,4 @@
+import { AccountModule } from './account/account.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
@@ -14,7 +15,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  }
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
+  },
 ];
 
 @NgModule({
