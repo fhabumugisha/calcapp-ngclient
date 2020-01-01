@@ -3,7 +3,7 @@ export class Item {
     public _id: string,
     public title: string,
     public amount: number,
-
+    public description: string
    ){
 
    }
