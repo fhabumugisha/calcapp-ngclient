@@ -33,7 +33,7 @@ export class EditProjectComponent implements OnInit {
   projectForm: FormGroup;
   panelOpenState = false;
 
-  displayedColumns = ['item', 'cost', 'actions'];
+  displayedColumns = ['item', 'description', 'cost', 'actions'];
   editCatelogDialogRef: MatDialogRef<EditCategoryComponent>;
   editItemDialogRef: MatDialogRef<EditItemComponent>;
 
@@ -73,7 +73,6 @@ export class EditProjectComponent implements OnInit {
   }
 
   private initForm() {
-    console.log('initForm');
 
     let title = '';
     let type = '';
@@ -89,13 +88,17 @@ export class EditProjectComponent implements OnInit {
 
     if (this.project.items) {
       for (const item of this.project.items) {
+        console.log(item);
+
         itemsControls.push(
           new FormGroup({
             title: new FormControl(item.title, Validators.required),
             amount: new FormControl(item.amount, [
               Validators.required,
               Validators.pattern(/^\d+\.?\d{0,2}$/)
-            ])
+            ]),
+            description: new FormControl(item.description)
+
           })
         );
       }
@@ -108,7 +111,8 @@ export class EditProjectComponent implements OnInit {
             categoryItems.push(
             new FormGroup({
               title: new FormControl(item.title, Validators.required),
-              amount: new FormControl(item.amount, [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)])
+              amount: new FormControl(item.amount, [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)]),
+              description: new FormControl(item.description),
             })
           );
           }
@@ -119,6 +123,7 @@ export class EditProjectComponent implements OnInit {
             type: new FormControl(category.type, Validators.required),
             items : categoryItems,
             totalAmount : new FormControl(category.totalAmount),
+            description: new FormControl(category.description),
           })
         );
       }
@@ -195,12 +200,13 @@ export class EditProjectComponent implements OnInit {
       hasBackdrop: true,
       data : {
         title : categoryCtrl ? categoryCtrl.value.title : '',
-        type : categoryCtrl ? categoryCtrl.value.type : ''
+        type : categoryCtrl ? categoryCtrl.value.type : '',
+        description : categoryCtrl ? categoryCtrl.value.description : ''
       }
     });
     this.editCatelogDialogRef
         .afterClosed()
-        .subscribe((categoryFormData: {title: string, type: string}) => {
+        .subscribe((categoryFormData: {title: string, type: string, description: string}) => {
           if (categoryFormData) {
 
             if (index !== undefined) {
@@ -212,6 +218,7 @@ export class EditProjectComponent implements OnInit {
               new FormGroup({
                 title: new FormControl(categoryFormData.title, Validators.required),
                 type: new FormControl(categoryFormData.type, Validators.required ),
+                description: new FormControl(categoryFormData.description),
                 items : categoryCtrl ? categoryCtrl.get('items') : new FormArray([]),
                 totalAmount : categoryCtrl ? new FormControl(categoryCtrl.value.totalAmount ) : new FormControl(0)
               })
@@ -229,15 +236,14 @@ export class EditProjectComponent implements OnInit {
       data : {
         _id: item ? item._id : '',
         title : item ? item.title : '',
-        amount : item ? item.amount : ''
+        amount : item ? item.amount : '',
+        description: item ? item.description : ''
       }
     });
 
-
-
     this.editItemDialogRef
     .afterClosed()
-    .subscribe((itemFormData: {_id: string, title: string, amount: number}) => {
+    .subscribe((itemFormData: {_id: string, title: string, amount: number, description: string}) => {
       if (itemFormData) {
 
         if (indexItem !== undefined) {
@@ -249,7 +255,8 @@ export class EditProjectComponent implements OnInit {
           amount: new FormControl(itemFormData.amount, [
             Validators.required,
             Validators.pattern(/^\d+\.?\d{0,2}$/)
-          ])
+          ]),
+          description: new FormControl(itemFormData.description),
         }));
 
         this.onSubmit();
@@ -266,13 +273,14 @@ export class EditProjectComponent implements OnInit {
       data : {
         _id: item ? item._id : '',
         title : item ? item.title : '',
-        amount : item ? item.amount : ''
+        amount : item ? item.amount : '',
+        description: item ? item.description : ''
       }
     });
 
     this.editItemDialogRef
     .afterClosed()
-    .subscribe((itemFormData: {_id: string, title: string, amount: number}) => {
+    .subscribe((itemFormData: {_id: string, title: string, amount: number, description: string}) => {
       if (itemFormData) {
 
         if (indexItem !== undefined) {
@@ -284,7 +292,8 @@ export class EditProjectComponent implements OnInit {
           amount: new FormControl(itemFormData.amount, [
             Validators.required,
             Validators.pattern(/^\d+\.?\d{0,2}$/)
-          ])
+          ]),
+          description: new FormControl(itemFormData.description),
         }));
 
         this.onSubmit();

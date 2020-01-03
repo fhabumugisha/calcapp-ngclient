@@ -72,6 +72,17 @@
                   </td>
                 </ng-container>
 
+                 <!-- Description Column -->
+                 <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef>Description</th>
+                  <td mat-cell *matCellDef="let item">
+                    {{ item.value.description }}
+                  </td>
+                  <td mat-footer-cell *matFooterCellDef>
+                    
+                  </td>
+                </ng-container>
+
                 <!-- Cost Column -->
                 <ng-container matColumnDef="cost">
                   <th mat-header-cell *matHeaderCellDef>
@@ -177,6 +188,7 @@
                 </mat-panel-title>
                 <mat-panel-description>
                   <!-- {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount | currency :'EUR' }} -->
+                  Description : {{ categoryCtrl.value.description }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
@@ -204,6 +216,17 @@
                     </td>
                     <td mat-footer-cell *matFooterCellDef>
                       {{ "EDIT_PROJECT.TOTAL" | translate }} :
+                    </td>
+                  </ng-container>
+
+                   <!-- Description Column -->
+                   <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>Description</th>
+                    <td mat-cell *matCellDef="let item">
+                      {{ item.value.description }}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>
+
                     </td>
                   </ng-container>
 

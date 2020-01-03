@@ -19,10 +19,11 @@ export class EditItemComponent implements OnInit {
       _id: [this.data ? this.data._id : ''],
       title: [this.data ? this.data.title : '', Validators.required],
       amount: [this.data ? this.data.amount : '', [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)]],
+      description: [this.data ? this.data.description : ''],
     });
   }
   submit(form) {
-    this.dialogRef.close(this.form.value);
+       this.dialogRef.close(this.form.value);
   }
 
   onNoClick(): void {

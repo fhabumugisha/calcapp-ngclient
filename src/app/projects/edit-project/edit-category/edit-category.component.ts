@@ -19,6 +19,7 @@ export class EditCategoryComponent implements OnInit {
       this.form = this.formBuilder.group({
       title: [this.data ?  this.data.title : '', Validators.required],
       type: [this.data ? this.data.type : '', Validators.required],
+      description: [this.data ? this.data.description : ''],
 
     });
   }
