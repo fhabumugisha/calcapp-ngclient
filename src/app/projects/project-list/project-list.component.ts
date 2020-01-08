@@ -69,7 +69,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   generatePdf(projectId: string){
     this.projectService.getProject(projectId).subscribe(data => {
       const project: Project  =  data;
-      const documentDefinition = { content: [
+      const documentDefinition = {
+        content: [
         {
           text: project.title,
           bold: true,
@@ -78,8 +79,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
         }
       ] };
-      pdfMake.createPdf(documentDefinition).open();
+      pdfMake.createPdf(documentDefinition).download();
       //https://www.ngdevelop.tech/angular-8-export-to-pdf-using-pdfmake/
+      //https://www.ngdevelop.tech/export-to-excel-in-angular-6/
     });
 
 

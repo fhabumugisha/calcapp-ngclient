@@ -1,12 +1,10 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../shared/material.module';
-import { TranslateModule } from '@ngx-translate/core';
-import { TranslationModule } from '../translation/translation.module';
 import { ErrorDialogComponent } from '../shared/error/error-dialog/error-dialog.component';
 
 const authRoutes: Routes = [
@@ -21,9 +19,7 @@ const authRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(authRoutes),
-    MaterialModule,
-    TranslateModule,
-    TranslationModule,
+   SharedModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [ ErrorDialogComponent]
