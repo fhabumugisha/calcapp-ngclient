@@ -1,4 +1,4 @@
-import { ErrorDialogComponent } from './error/error-dialog/error-dialog.component';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -24,12 +24,12 @@ import {MatSidenavModule,
   MatDialogModule,
   MatMenuModule,
   MatProgressSpinnerModule} from '@angular/material';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
 
 
 
 @NgModule({
-  declarations: [ ErrorDialogComponent, ConfirmDialogComponent],
+  declarations: [ ],
   imports: [
     CommonModule,
       MatButtonModule,
@@ -58,7 +58,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+
   ],
   exports: [
     MatButtonModule,

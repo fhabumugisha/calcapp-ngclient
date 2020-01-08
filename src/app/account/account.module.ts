@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { createTranslateLoader } from '../projects/projects.module';
 import { TranslationModule } from '../translation/translation.module';
 import { ErrorDialogComponent } from '../shared/error/error-dialog/error-dialog.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: MyAccountComponent, canActivate: [AuthGuard],
@@ -22,17 +23,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [MyAccountComponent],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    TranslationModule,
-    MaterialModule
+    SharedModule
+
   ],
   exports: [RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -96,5 +96,13 @@
 "MY_ACCOUNT" : {
   "TITLE" : "My account",
   "DELETE" : "Delete account"
+},
+
+"DELETE_DIALOG" : {
+  "CONFIRM" : "Confirm",
+  "NO": "No, don't delete",
+  "YES": "Yes, delete ",
+  "MESSAGE" : "Are you sure , you want to delete this item ?"
+
 }
 }

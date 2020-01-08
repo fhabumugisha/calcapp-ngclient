@@ -20,10 +20,14 @@
         <mat-panel-description >
         <!--   {{ project.type }} -->
         </mat-panel-description>
-        <span
-        >{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :     {{ project.totalAmount | currency :'EUR'}}</span
-      >
-      <p>{{ project.description }}</p>
+        <div fxLayout>
+          <span
+          ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>     {{ project.totalAmount | currency :'EUR'}}</span>
+        <p><strong>Description : </strong> {{ project.description }}</p>
+
+        </div>
+
+
          <mat-action-row>
           <a
           style="cursor:pointer;"

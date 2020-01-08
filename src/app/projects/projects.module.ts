@@ -13,6 +13,8 @@ import { HttpClient } from '@angular/common/http';
 import { EditCategoryComponent } from './edit-project/edit-category/edit-category.component';
 import { EditItemComponent } from './edit-project/edit-item/edit-item.component';
 import { ErrorDialogComponent } from '../shared/error/error-dialog/error-dialog.component';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { SharedModule } from '../shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,22 +29,14 @@ export function createTranslateLoader(http: HttpClient) {
     EditItemComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     ProjectsRoutingModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    TranslationModule,
+    SharedModule,
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA ],
-  entryComponents: [EditCategoryComponent, EditItemComponent, ErrorDialogComponent],
+  entryComponents: [EditCategoryComponent, EditItemComponent, ErrorDialogComponent, ConfirmDialogComponent],
+
   providers: [
 
   ]

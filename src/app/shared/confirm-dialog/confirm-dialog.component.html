@@ -1,12 +1,12 @@
 
-<h1 matDialogTitle>Confirm</h1>
+<h1 matDialogTitle>{{ "DELETE_DIALOG.CONFIRM" | translate }} </h1>
 
 <mat-dialog-content>
- Are you sure , you want to delete {{elementToDelete}}?
+  {{ "DELETE_DIALOG.MESSAGE" | translate }}
 </mat-dialog-content>
 
 <mat-dialog-actions >
 
-    <button mat-button matDialogClose>No, don't delete </button>
-    <button mat-button color="warn" (click)="onConfirm(true)">Yes, delete </button>
+    <button mat-button matDialogClose>{{ "DELETE_DIALOG.NO" | translate }}</button>
+    <button mat-button color="warn" (click)="onConfirm(true)">{{ "DELETE_DIALOG.YES" | translate }}</button>
 </mat-dialog-actions>

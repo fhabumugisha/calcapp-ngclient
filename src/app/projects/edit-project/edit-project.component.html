@@ -50,7 +50,7 @@
                   itemsControls.length
                 }})
               </mat-panel-title>
-              <mat-panel-description>
+              <mat-panel-description  class="d-none d-sm-block">
                 {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :
                 {{ this.project.totalAmount | currency: "EUR" }}
               </mat-panel-description>
@@ -73,14 +73,12 @@
                 </ng-container>
 
                  <!-- Description Column -->
-                 <ng-container matColumnDef="description">
+                 <ng-container matColumnDef="description" class="d-none d-sm-block">
                   <th mat-header-cell *matHeaderCellDef>Description</th>
-                  <td mat-cell *matCellDef="let item">
+                  <td mat-cell *matCellDef="let item" class="overflow-ellipsis">
                     {{ item.value.description }}
                   </td>
-                  <td mat-footer-cell *matFooterCellDef>
-                    
-                  </td>
+                  <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <!-- Cost Column -->
@@ -183,15 +181,20 @@
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <h5>{{ categoryCtrl.value.title }}</h5>
-                  &nbsp; - {{ categoryCtrl.value.type }} (
-                  {{ categoryCtrl.value.totalAmount | currency: "EUR" }})
+
+                    &nbsp; - {{ categoryCtrl.value.type }} <span class="d-none d-sm-block"> (
+                      {{ categoryCtrl.value.totalAmount | currency: "EUR" }})
+                  </span>
+
                 </mat-panel-title>
-                <mat-panel-description>
+                <mat-panel-description class="d-none d-sm-block">
                   <!-- {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount | currency :'EUR' }} -->
                   Description : {{ categoryCtrl.value.description }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
-
+              <div fxLayout="row" class="d-block d-sm-none">
+               <strong>Description : </strong> {{ categoryCtrl.value.description }}
+              </div>
               <div class="titleActions">
                 <a
                   mat-button
@@ -202,6 +205,8 @@
                   {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
                 </a>
               </div>
+
+
 
               <div class="example-container mat-elevation-z8">
                 <table
@@ -222,8 +227,9 @@
                    <!-- Description Column -->
                    <ng-container matColumnDef="description">
                     <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef="let item">
-                      {{ item.value.description }}
+                    <td mat-cell *matCellDef="let item" class="overflow-ellipsis">
+
+                       {{ item.value.description }}
                     </td>
                     <td mat-footer-cell *matFooterCellDef>
 

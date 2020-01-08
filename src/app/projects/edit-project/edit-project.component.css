@@ -51,3 +51,10 @@ mat-action-row {
   margin-right: 16px !important;
 
 }
+
+.overflow-ellipsis{
+   /* Nécessaires pour text-overflow */
+   /* white-space: nowrap;
+   overflow: hidden; */
+  text-overflow: ellipsis;
+}
