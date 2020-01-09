@@ -58,3 +58,7 @@ mat-action-row {
    overflow: hidden; */
   text-overflow: ellipsis;
 }
+
+.expansion-content {
+  padding: 0 18px;
+}

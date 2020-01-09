@@ -17,3 +17,8 @@ mat-form-field {
 .example-button-row a {
   margin-right: 8px;
 }
+
+
+.expansion-content {
+  padding: 0 18px;
+}
