@@ -1,3 +1,4 @@
+<div class="mx-auto" style="padding: 10px;">
 <mat-spinner *ngIf="isLoading" mx-auto></mat-spinner>
 <div class="card mx-auto example-container" *ngIf="!isLoading">
   <div class="card-header">
@@ -12,4 +13,5 @@
 
     <button mat-raised-button color="warn" (click)="onDelete()">  {{ "MY_ACCOUNT.DELETE" | translate }}</button>
   </div>
+</div>
 </div>

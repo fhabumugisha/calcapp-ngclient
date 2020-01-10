@@ -1,8 +1,4 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 26rem;
-}
+
 
 mat-spinner {
   margin: auto;
@@ -11,4 +7,8 @@ mat-spinner {
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
+}
+
+mat-card {
+  margin-bottom: 10px !important;
 }

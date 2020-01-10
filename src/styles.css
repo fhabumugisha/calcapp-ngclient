@@ -46,6 +46,15 @@ body{margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   padding-top: 0 !important;
 } */
 
+.content-title{
+  border-left: 16px solid #ff4081;
+  border-bottom: 2px solid #ff4081;
+  padding-left: 8px;
+  padding-right: 16px;
+  display: inline-block;
+  color: #555;
+  letter-spacing: 0;
+}
 
 
 

@@ -65,7 +65,7 @@
       </mat-form-field>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="page-wrap">
     <mat-toolbar color="primary">
       <button
         type="button"
@@ -129,9 +129,13 @@
     </mat-toolbar>
     <!-- Add Content Here -->
     <br />
-    <main style="padding: 15px;">
+    <main class="content">
       <ng-content></ng-content>
     </main>
+    <footer>
+
+        <mat-toolbar color="primary">Made with love by Fab</mat-toolbar>
+    </footer>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

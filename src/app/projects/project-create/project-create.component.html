@@ -1,9 +1,8 @@
-<div class="card mx-auto example-container" >
-    <div class="card-header">
-      New project
-    </div>
-    <div class="card-body">
-      <form  #createProjectForm="ngForm" (ngSubmit)="onSubmit(createProjectForm)" class="example-form">
+<div class="mx-auto" style="padding: 10px;">
+
+    <h2 class="content-title">  {{ "EDIT_PROJECT.NEW" | translate }}</h2>
+
+      <form  #createProjectForm="ngForm" (ngSubmit)="onSubmit(createProjectForm)" class="example-form mat-card">
 
           <mat-form-field >
             <input matInput placeholder="Title" name="title" ngModel  required>
@@ -46,6 +45,6 @@
 
           </div>
       </form>
-    </div>
+
 
   </div>

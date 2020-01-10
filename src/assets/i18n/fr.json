@@ -89,7 +89,8 @@
     "AMOUNT" : "Montant",
     "TOTAL_AMOUNT" : "Montant total",
     "EDIT_CATEGORY":"Modifier catégorie",
-    "TOTAL" : "Total"
+    "TOTAL" : "Total",
+    "NEW" : "Nouveau projet"
   },
 
 "MY_ACCOUNT" : {

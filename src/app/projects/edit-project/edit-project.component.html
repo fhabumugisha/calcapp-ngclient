@@ -1,14 +1,13 @@
-<div class="card mx-auto example-container">
-  <div class="card-header">
-    {{ "EDIT_PROJECT.TITLE" | translate }}
-  </div>
-  <div class="card-body">
+
+  <div class="mx-auto" style="padding: 10px;">
+    <h2 class="content-title">  {{ "EDIT_PROJECT.TITLE" | translate }}</h2>
     <form
       *ngIf="projectForm"
       [formGroup]="projectForm"
       (ngSubmit)="onSubmit()"
-      class="example-form"
+      class="example-form "
     >
+    <div class="mat-card">
       <mat-form-field>
         <input matInput placeholder="Title" formControlName="title" required />
       </mat-form-field>
@@ -38,7 +37,7 @@
           formControlName="description"
         ></textarea>
       </mat-form-field>
-
+    </div>
       <div *ngIf="project.type === 'Cost' || project.type === 'Other'">
         <mat-divider></mat-divider>
 
@@ -217,7 +216,7 @@
         </mat-accordion>
       </div>
 
-      <mat-divider></mat-divider>
+
 
       <hr />
       <div class="example-button-row">
@@ -243,5 +242,4 @@
         </button>
       </div>
     </form>
-  </div>
-</div>
+

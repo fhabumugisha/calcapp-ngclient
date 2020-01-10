@@ -1,14 +1,13 @@
+<div class="mx-auto" style="padding: 10px;">
 <ng-container *ngIf="projects.length > 0; else noProjects">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="example-button-row">
-        <a mat-raised-button color="accent" routerLink="new">
+  <div style="display: flex; justify-content: space-between;">
+      <h2 class="content-title">  {{ "MENUS.PROJECTS" | translate }}</h2>
+      <button color="accent" mat-mini-fab aria-label="Add project" routerLink="new">
           <mat-icon>add</mat-icon>
-          {{ "PROJECTS.ADD_PROJECT" | translate }}</a
-        >
-      </div>
-    </div>
+        </button>
+
   </div>
+
   <hr />
 
   <mat-divider></mat-divider>
@@ -82,3 +81,4 @@
     </div>
   </div>
 </ng-template>
+</div>

@@ -89,7 +89,8 @@
     "AMOUNT" : "Amount",
     "TOTAL_AMOUNT" : "Total amount",
     "EDIT_CATEGORY":"Edit category",
-    "TOTAL" : "Total"
+    "TOTAL" : "Total",
+    "NEW" : "New project"
 
 },
 
