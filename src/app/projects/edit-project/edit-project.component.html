@@ -56,86 +56,40 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
 
+            <div class="d-block d-sm-none expansion-content">
+             <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>
+              {{ this.project.totalAmount | currency: "EUR" }}
+            </div>
+            <br>
             <div
-              class="example-container mat-elevation-z8"
+              class="example-container "
               formArrayName="items"
             >
-              <table mat-table [dataSource]="itemsControls">
-                <!-- Item Column -->
-                <ng-container matColumnDef="item">
-                  <th mat-header-cell *matHeaderCellDef>Item</th>
-                  <td mat-cell *matCellDef="let item">
-                    {{ item.value.title }}
-                  </td>
-                  <td mat-footer-cell *matFooterCellDef>
-                    {{ "EDIT_PROJECT.TOTAL" | translate }} :
-                  </td>
-                </ng-container>
+            <mat-card class="mat-elevation-z8"  *ngFor="let item;let indexItem = index of itemsControls" >
+              <div style="display: flex; justify-content: space-between;">
+                <h4> {{item.value.title}}</h4>
 
-                 <!-- Description Column -->
-                 <ng-container matColumnDef="description" class="d-none d-sm-block">
-                  <th mat-header-cell *matHeaderCellDef>Description</th>
-                  <td mat-cell *matCellDef="let item" class="overflow-ellipsis">
-                    {{ item.value.description }}
-                  </td>
-                  <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
+                <h5> {{item.value.amount | currency: "EUR"}}</h5>
 
-                <!-- Cost Column -->
-                <ng-container matColumnDef="cost">
-                  <th mat-header-cell *matHeaderCellDef>
-                    {{ "EDIT_PROJECT.AMOUNT" | translate }}
-                  </th>
-                  <td mat-cell *matCellDef="let item">
-                    {{ item.value.amount | currency: "EUR" }}
-                  </td>
-                  <td mat-footer-cell *matFooterCellDef>
-                    {{ this.project.totalAmount | currency: "EUR" }}
-                  </td>
-                </ng-container>
-                <!-- Actions Column -->
-                <ng-container matColumnDef="actions">
-                  <th mat-header-cell *matHeaderCellDef>#</th>
-                  <td mat-cell *matCellDef="let item; let indexItem = index">
-                    <button
-                      mat-icon-button
-                      [matMenuTriggerFor]="menu"
-                      type="button"
-                    >
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                      <button
-                        mat-menu-item
-                        type="button"
-                        (click)="onEditProjectItemDialog(indexItem, item.value)"
-                      >
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit</span>
-                      </button>
-                      <button
-                        mat-menu-item
-                        type="button"
-                        (click)="onDeleteItem(indexItem)"
-                      >
-                        <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
-                      </button>
-                    </mat-menu>
-                  </td>
-                  <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
+              </div>
+              <mat-card-content>
+                <p>
+                 {{item.value.description}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <button type="button" mat-button color="accent"
+                (click)="onEditProjectItemDialog(indexItem, item.value)">
+                {{ "EDIT_PROJECT.EDIT" | translate }}
+              </button>
+            <button type="button" mat-button  (click)="onDeleteItem(indexItem)">
+              {{ "EDIT_PROJECT.DELETE" | translate }}
+            </button>
+              </mat-card-actions>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let row; columns: displayedColumns"
-                ></tr>
-                <tr
-                  mat-footer-row
-                  *matFooterRowDef="displayedColumns; sticky: true"
-                ></tr>
-              </table>
+            </mat-card>
+
+
             </div>
 
             <mat-action-row>
@@ -194,6 +148,7 @@
               </mat-expansion-panel-header>
 
               <div fxLayout="row" class="d-block d-sm-none expansion-content">
+                <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : </strong>  {{ categoryCtrl.value.totalAmount | currency: "EUR" }} <br>
                <strong>Description : </strong> {{ categoryCtrl.value.description }}
               </div>
               <div class="titleActions">
@@ -208,99 +163,32 @@
               </div>
 
 
+              <mat-card class="mat-elevation-z8"  *ngFor="let item;let indexItem = index of getCategoryItemsControls(categoryCtrl)" >
+                <div style="display: flex; justify-content: space-between;">
+                  <h4> {{item.value.title}}</h4>
 
-              <div class="example-container mat-elevation-z8">
-                <table
-                  mat-table
-                  [dataSource]="getCategoryItemsControls(categoryCtrl)"
-                >
-                  <!-- Item Column -->
-                  <ng-container matColumnDef="item">
-                    <th mat-header-cell *matHeaderCellDef>Item</th>
-                    <td mat-cell *matCellDef="let item">
-                      {{ item.value.title }}
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef>
-                      {{ "EDIT_PROJECT.TOTAL" | translate }} :
-                    </td>
-                  </ng-container>
+                  <h5> {{item.value.amount | currency: "EUR"}}</h5>
 
-                   <!-- Description Column -->
-                   <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef="let item" class="overflow-ellipsis">
+                </div>
+                <mat-card-content>
+                  <p>
+                   {{item.value.description}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                  <button type="button" mat-button color="accent"  (click)="onEditCategoryItemDialog(
+                    categoryCtrl,
+                    indexItem,
+                    item.value
+                  )">{{ "EDIT_PROJECT.EDIT" | translate }}</button>
+              <button type="button" mat-button  (click)="onDeleteCategoryItem(categoryCtrl, indexItem)">
+                {{ "EDIT_PROJECT.DELETE" | translate }}
+              </button>
+                </mat-card-actions>
 
-                       {{ item.value.description }}
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef>
+              </mat-card>
 
-                    </td>
-                  </ng-container>
 
-                  <!-- Cost Column -->
-                  <ng-container matColumnDef="cost">
-                    <th mat-header-cell *matHeaderCellDef>
-                      {{ "EDIT_PROJECT.AMOUNT" | translate }}
-                    </th>
-                    <td mat-cell *matCellDef="let item">
-                      {{ item.value.amount | currency: "EUR" }}
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef>
-                      {{ categoryCtrl.value.totalAmount | currency: "EUR" }}
-                    </td>
-                  </ng-container>
-                  <!-- Actions Column -->
-                  <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>#</th>
-                    <td mat-cell *matCellDef="let item; let indexItem = index">
-                      <button
-                        mat-icon-button
-                        [matMenuTriggerFor]="menu"
-                        type="button"
-                      >
-                        <mat-icon>more_vert</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button
-                          mat-menu-item
-                          type="button"
-                          (click)="
-                            onEditCategoryItemDialog(
-                              categoryCtrl,
-                              indexItem,
-                              item.value
-                            )
-                          "
-                        >
-                          <mat-icon>edit</mat-icon>
-                          <span>Edit</span>
-                        </button>
-                        <button
-                          mat-menu-item
-                          type="button"
-                          (click)="
-                            onDeleteCategoryItem(categoryCtrl, indexItem)
-                          "
-                        >
-                          <mat-icon>delete</mat-icon>
-                          <span>Delete</span>
-                        </button>
-                      </mat-menu>
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr
-                    mat-row
-                    *matRowDef="let row; columns: displayedColumns"
-                  ></tr>
-                  <tr
-                    mat-footer-row
-                    *matFooterRowDef="displayedColumns; sticky: true"
-                  ></tr>
-                </table>
-              </div>
 
               <mat-divider></mat-divider>
 

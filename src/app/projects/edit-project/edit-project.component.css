@@ -62,3 +62,11 @@ mat-action-row {
 .expansion-content {
   padding: 0 18px;
 }
+.example-card {
+
+  margin-top: 10px;
+  }
+
+  mat-card {
+    margin-bottom: 10px !important;
+  }
