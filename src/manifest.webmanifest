@@ -1,6 +1,6 @@
 {
-  "name": "calcapp-ngclient",
-  "short_name": "calcapp-ngclient",
+  "name": "Simple calc app",
+  "short_name": "calcapp",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
