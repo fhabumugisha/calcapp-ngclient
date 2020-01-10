@@ -1,12 +1,11 @@
-
-  <div class="mx-auto" style="padding: 10px;">
-    <h2 class="content-title">  {{ "EDIT_PROJECT.TITLE" | translate }}</h2>
-    <form
-      *ngIf="projectForm"
-      [formGroup]="projectForm"
-      (ngSubmit)="onSubmit()"
-      class="example-form "
-    >
+<div class="mx-auto" style="padding: 10px;">
+  <h2 class="content-title">{{ "EDIT_PROJECT.TITLE" | translate }}</h2>
+  <form
+    *ngIf="projectForm"
+    [formGroup]="projectForm"
+    (ngSubmit)="onSubmit()"
+    class="example-form "
+  >
     <div class="mat-card">
       <mat-form-field>
         <input matInput placeholder="Title" formControlName="title" required />
@@ -38,208 +37,227 @@
         ></textarea>
       </mat-form-field>
     </div>
-      <div *ngIf="project.type === 'Cost' || project.type === 'Other'">
-        <mat-divider></mat-divider>
+    <div *ngIf="project.type === 'Cost' || project.type === 'Other'">
+      <mat-divider></mat-divider>
 
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title
-                >{{ "EDIT_PROJECT.ITEMS" | translate }} ({{
-                  itemsControls.length
-                }})
-              </mat-panel-title>
-              <mat-panel-description  class="d-none d-sm-block">
-                {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :
-                {{ this.project.totalAmount | currency: "EUR" }}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="d-block d-sm-none expansion-content">
-             <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title
+              >{{ "EDIT_PROJECT.ITEMS" | translate }} ({{
+                itemsControls.length
+              }})
+            </mat-panel-title>
+            <mat-panel-description class="d-none d-sm-block">
+              {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :
               {{ this.project.totalAmount | currency: "EUR" }}
-            </div>
-            <br>
-            <div
-              class="example-container "
-              formArrayName="items"
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="d-block d-sm-none expansion-content">
+            <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>
+            {{ this.project.totalAmount | currency: "EUR" }}
+          </div>
+          <br />
+          <div class="example-container " formArrayName="items">
+            <mat-card
+              class="mat-elevation-z8"
+              *ngFor="let item; let indexItem = index; of: itemsControls"
             >
-            <mat-card class="mat-elevation-z8"  *ngFor="let item;let indexItem = index of itemsControls" >
               <div style="display: flex; justify-content: space-between;">
-                <h4> {{item.value.title}}</h4>
+                <h4>{{ item.value.title }}</h4>
 
-                <h5> {{item.value.amount | currency: "EUR"}}</h5>
-
+                <h5>{{ item.value.amount | currency: "EUR" }}</h5>
               </div>
               <mat-card-content>
                 <p>
-                 {{item.value.description}}
+                  {{ item.value.description }}
                 </p>
               </mat-card-content>
               <mat-card-actions align="end">
-                <button type="button" mat-button color="accent"
-                (click)="onEditProjectItemDialog(indexItem, item.value)">
-                {{ "EDIT_PROJECT.EDIT" | translate }}
-              </button>
-            <button type="button" mat-button  (click)="onDeleteItem(indexItem)">
-              {{ "EDIT_PROJECT.DELETE" | translate }}
-            </button>
+                <button
+                  type="button"
+                  mat-button
+                  color="accent"
+                  (click)="onEditProjectItemDialog(indexItem, item.value)"
+                >
+                  {{ "EDIT_PROJECT.EDIT" | translate }}
+                </button>
+                <button
+                  type="button"
+                  mat-button
+                  (click)="onDeleteItem(indexItem)"
+                >
+                  {{ "EDIT_PROJECT.DELETE" | translate }}
+                </button>
               </mat-card-actions>
-
             </mat-card>
+          </div>
 
+          <mat-action-row>
+            <a
+              mat-button
+              color="accent"
+              title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
+              (click)="onEditProjectItemDialog()"
+            >
+              {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
+            </a>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
 
+    <div *ngIf="project.type === 'Budget'">
+      <div class="titleActions">
+        <h5>
+          {{ "EDIT_PROJECT.CATEGORIES" | translate }} ({{
+            project.categories.length
+          }})
+        </h5>
+        <span class="spacer"></span>
+
+        <a
+          mat-raised-button
+          color="accent"
+          (click)="onEditCategoryDialog()"
+          title="{{ 'EDIT_PROJECT.ADD_CATEGORY' | translate }}"
+        >
+          {{ "EDIT_PROJECT.ADD_CATEGORY" | translate }}
+        </a>
+      </div>
+
+      <mat-accordion multi="true">
+        <div formArrayName="categories">
+          <mat-expansion-panel
+            [expanded]="indexOpenedCateg === i"
+            (opened)="setIndexOpenedCateg(i)"
+            *ngFor="let categoryCtrl of categoriesControls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5>{{ categoryCtrl.value.title }}</h5>
+
+                &nbsp; - {{ categoryCtrl.value.type }}
+                <span class="d-none d-sm-block">
+                  ( {{ categoryCtrl.value.totalAmount | currency: "EUR" }})
+                </span>
+              </mat-panel-title>
+              <mat-panel-description class="d-none d-sm-block">
+                Description : {{ categoryCtrl.value.description }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row" class="d-block d-sm-none expansion-content">
+              <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : </strong>
+              {{ categoryCtrl.value.totalAmount | currency: "EUR" }} <br />
+              <strong>Description : </strong>
+              {{ categoryCtrl.value.description }}
             </div>
-
-            <mat-action-row>
+            <div class="titleActions">
               <a
                 mat-button
                 color="accent"
                 title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
-                (click)="onEditProjectItemDialog()"
+                (click)="onEditCategoryItemDialog(categoryCtrl)"
               >
                 {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
               </a>
+            </div>
+
+            <mat-card
+              class="mat-elevation-z8"
+              *ngFor="
+                let item;
+                let indexItem = index;
+                of: getCategoryItemsControls(categoryCtrl)
+              "
+            >
+              <div style="display: flex; justify-content: space-between;">
+                <h4>{{ item.value.title }}</h4>
+                <h5>{{ item.value.amount | currency: "EUR" }}</h5>
+              </div>
+
+              <mat-card-content>
+                <small>
+                  {{ item.value.description }}
+                </small>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <button
+                  type="button"
+                  mat-button
+                  color="accent"
+                  (click)="
+                    onEditCategoryItemDialog(
+                      categoryCtrl,
+                      indexItem,
+                      item.value
+                    )
+                  "
+                >
+                  {{ "EDIT_PROJECT.EDIT" | translate }}
+                </button>
+                <button
+                  type="button"
+                  mat-button
+                  (click)="onDeleteCategoryItem(categoryCtrl, indexItem)"
+                >
+                  {{ "EDIT_PROJECT.DELETE" | translate }}
+                </button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <mat-action-row>
+              <button
+                type="button"
+                mat-button
+                color="accent"
+                title=" {{ 'EDIT_PROJECT.EDIT_CATEGORY' | translate }}"
+                (click)="onEditCategoryDialog(i, categoryCtrl)"
+              >
+                {{ "BOUTON.EDIT_PROJECT" | translate }}
+              </button>
+              <button
+                type="button"
+                mat-button
+                color="accent"
+                title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
+                (click)="onDeleteCategory(i)"
+              >
+                {{ "BOUTON.DELETE" | translate }}
+              </button>
             </mat-action-row>
           </mat-expansion-panel>
-        </mat-accordion>
-      </div>
-
-      <div *ngIf="project.type === 'Budget'">
-        <div class="titleActions">
-          <h5>
-            {{ "EDIT_PROJECT.CATEGORIES" | translate }} ({{
-              project.categories.length
-            }})
-          </h5>
-          <span class="spacer"></span>
-
-          <a
-            mat-raised-button
-            color="accent"
-            (click)="onEditCategoryDialog()"
-            title="{{ 'EDIT_PROJECT.ADD_CATEGORY' | translate }}"
-          >
-            {{ "EDIT_PROJECT.ADD_CATEGORY" | translate }}
-          </a>
         </div>
+      </mat-accordion>
+    </div>
 
-        <mat-accordion multi="true">
-          <div formArrayName="categories">
-            <mat-expansion-panel
-            [expanded]="indexOpenedCateg === i" (opened)="setIndexOpenedCateg(i)"
-              *ngFor="let categoryCtrl of categoriesControls; let i = index"
-              [formGroupName]="i"
-            >
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <h5>{{ categoryCtrl.value.title }}</h5>
+    <hr />
+    <div class="example-button-row">
+      <button
+        mat-stroked-button
+        mat-raised-button
+        mat-primary
+        type="button"
+        [routerLink]="['/projects']"
+      >
+        {{ "PROJECTS.RETURN_LIST" | translate }}
+      </button>
 
-                    &nbsp; - {{ categoryCtrl.value.type }} <span class="d-none d-sm-block"> (
-                      {{ categoryCtrl.value.totalAmount | currency: "EUR" }})
-                  </span>
-
-                </mat-panel-title>
-                <mat-panel-description class="d-none d-sm-block">
-                  <!-- {{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : {{ categoryCtrl.value.totalAmount | currency :'EUR' }} -->
-                  Description : {{ categoryCtrl.value.description }}
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-
-              <div fxLayout="row" class="d-block d-sm-none expansion-content">
-                <strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} : </strong>  {{ categoryCtrl.value.totalAmount | currency: "EUR" }} <br>
-               <strong>Description : </strong> {{ categoryCtrl.value.description }}
-              </div>
-              <div class="titleActions">
-                <a
-                  mat-button
-                  color="accent"
-                  title="{{ 'EDIT_PROJECT.ADD_ITEM' | translate }}"
-                  (click)="onEditCategoryItemDialog(categoryCtrl)"
-                >
-                  {{ "EDIT_PROJECT.ADD_ITEM" | translate }}
-                </a>
-              </div>
-
-
-              <mat-card class="mat-elevation-z8"  *ngFor="let item;let indexItem = index of getCategoryItemsControls(categoryCtrl)" >
-                <div style="display: flex; justify-content: space-between;">
-                  <h4> {{item.value.title}}</h4>
-
-                  <h5> {{item.value.amount | currency: "EUR"}}</h5>
-
-                </div>
-                <mat-card-content>
-                  <p>
-                   {{item.value.description}}
-                  </p>
-                </mat-card-content>
-                <mat-card-actions align="end">
-                  <button type="button" mat-button color="accent"  (click)="onEditCategoryItemDialog(
-                    categoryCtrl,
-                    indexItem,
-                    item.value
-                  )">{{ "EDIT_PROJECT.EDIT" | translate }}</button>
-              <button type="button" mat-button  (click)="onDeleteCategoryItem(categoryCtrl, indexItem)">
-                {{ "EDIT_PROJECT.DELETE" | translate }}
-              </button>
-                </mat-card-actions>
-
-              </mat-card>
-
-
-
-              <mat-divider></mat-divider>
-
-              <mat-action-row>
-                <button
-                  type="button"
-                  mat-button
-                  color="accent"
-                  title=" {{ 'EDIT_PROJECT.EDIT_CATEGORY' | translate }}"
-                  (click)="onEditCategoryDialog(i, categoryCtrl)"
-                >
-                  {{ "BOUTON.EDIT_PROJECT" | translate }}
-                </button>
-                <button
-                  type="button"
-                  mat-button
-                  color="accent"
-                  title=" {{ 'EDIT_PROJECT.DELETE_CATEGORY' | translate }}"
-                  (click)="onDeleteCategory(i)"
-                >
-                  {{ "BOUTON.DELETE" | translate }}
-                </button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          </div>
-        </mat-accordion>
-      </div>
-
-
-
-      <hr />
-      <div class="example-button-row">
-        <button
-          mat-stroked-button
-          mat-raised-button
-          mat-primary
-          type="button"
-          [routerLink]="['/projects']"
-        >
-          {{ "PROJECTS.RETURN_LIST" | translate }}
-        </button>
-
-        <button
-          mat-stroked-button
-          mat-raised-button
-          mat-primary
-          color="primary"
-          type="submit"
-          [disabled]="!projectForm.valid"
-        >
-          {{ "BOUTON.SAVE" | translate }}
-        </button>
-      </div>
-    </form>
-
+      <button
+        mat-stroked-button
+        mat-raised-button
+        mat-primary
+        color="primary"
+        type="submit"
+        [disabled]="!projectForm.valid"
+      >
+        {{ "BOUTON.SAVE" | translate }}
+      </button>
+    </div>
+  </form>
+</div>

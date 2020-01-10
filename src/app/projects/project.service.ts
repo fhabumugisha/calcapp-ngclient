@@ -106,10 +106,7 @@ export class ProjectService {
   }
 
   categoryTypes = [
-    {
-      code: 'Other',
-      label: 'Other'
-    },
+
     {
       code: 'Income',
       label: 'Income'
@@ -125,10 +122,7 @@ export class ProjectService {
   }
 
   projectTypes =  [
-    {
-      code: 'Other',
-      label: 'Other'
-    },
+   
     {
       code: 'Budget',
       label: 'Budget'
