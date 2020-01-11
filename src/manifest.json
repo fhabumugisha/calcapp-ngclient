@@ -1,6 +1,6 @@
 {
   "name": "Simple calc app",
-  "short_name": "calcapp",
+  "short_name": "Calcapp",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
@@ -49,5 +49,6 @@
     }
   ]
 }
+
 
 

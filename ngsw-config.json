@@ -9,12 +9,16 @@
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/manifest.webmanifest",
+          "/manifest.json",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**"
         ]
       }
-    }, {
+    },
+     {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
@@ -23,6 +27,20 @@
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups" : [
+    {
+      "name": "calcapp-api",
+      "urls": [
+        "https://calcapp-api.herokuapp.com"
+      ],
+      "cacheConfig": {
+        "strategy":"freshness",
+        "maxAge": 20,
+        "maxSize":"1h",
+        "timeout":"5s"
       }
     }
   ]
