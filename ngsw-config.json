@@ -34,7 +34,7 @@
     {
       "name": "calcapp-api",
       "urls": [
-        "https://calcapp-api.herokuapp.com"
+        "https://calcapp-api.herokuapp.com/"
       ],
       "cacheConfig": {
         "strategy":"freshness",
