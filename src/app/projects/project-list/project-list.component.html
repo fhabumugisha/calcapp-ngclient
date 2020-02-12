@@ -1,84 +1,102 @@
-<div class="mx-auto" style="padding: 10px;">
-<ng-container *ngIf="projects.length > 0; else noProjects">
-  <div style="display: flex; justify-content: space-between;">
-      <h2 class="content-title">  {{ "MENUS.PROJECTS" | translate }}</h2>
-      <button color="accent" mat-mini-fab aria-label="Add project" routerLink="new">
-          <mat-icon>add</mat-icon>
-        </button>
+<mat-spinner *ngIf="isLoading" mx-auto></mat-spinner>
+<div class="mx-auto" style="padding: 10px;" *ngIf="!isLoading">
+  <ng-container *ngIf="projects.length > 0; else noProjects">
+    <div style="display: flex; justify-content: space-between;">
+      <h2 class="content-title">{{ "MENUS.PROJECTS" | translate }}</h2>
+      <button
+        color="accent"
+        mat-mini-fab
+        aria-label="Add project"
+        routerLink="new"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
 
-  </div>
+    <hr />
 
-  <hr />
-
-  <mat-divider></mat-divider>
-  <mat-accordion>
-    <mat-expansion-panel [hideToggle]="false" *ngFor="let project of projects">
+    <mat-divider></mat-divider>
+    <mat-accordion>
+      <mat-expansion-panel
+        [hideToggle]="false"
+        *ngFor="let project of projects"
+      >
         <mat-expansion-panel-header>
-          <mat-panel-title><h5>{{ project.title }}</h5>  <span class=" text-muted">&nbsp;- {{ project.type }}</span> </mat-panel-title>
+          <mat-panel-title
+            ><h5>{{ project.title }}</h5>
+            <span class=" text-muted">&nbsp;- {{ project.type }}</span>
+          </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-panel-description >
-        <!--   {{ project.type }} -->
+        <mat-panel-description>
+          <!--   {{ project.type }} -->
         </mat-panel-description>
         <div class="expansion-content">
           <span
-          ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>     {{ project.totalAmount | currency :'EUR'}}</span>
-        <p><strong>Description : </strong> {{ project.description }}</p>
-
+            ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>
+            {{ project.totalAmount | currency: "EUR" }}</span
+          >
+          <p><strong>Description : </strong> {{ project.description }}</p>
         </div>
 
-
-         <mat-action-row>
+        <mat-action-row>
           <a
-          style="cursor:pointer;"
-          class="card-link text-primary "
-          (click)="generatePdf(project._id)"
-          routerLinkActive="active"
-          >PDF</a
-        >
+            style="cursor:pointer;"
+            class="card-link text-primary "
+            (click)="copy(project)"
+            routerLinkActive="active"
+            >Copy</a>
+          <a
+            style="cursor:pointer;"
+            class="card-link text-primary "
+            (click)="generatePdf(project._id)"
+            routerLinkActive="active"
+            >PDF</a>
+          <a
+            style="cursor:pointer;"
+            class="card-link text-primary "
+            [routerLink]="[project._id, 'edit']"
+            routerLinkActive="active"
+            >{{ "PROJECTS.EDIT" | translate }}</a
+          >
+          <a
+            style="cursor:pointer;"
+            class="card-link text-danger "
+            (click)="onDelete(project._id)"
+          >
+            {{ "PROJECTS.DELETE" | translate }}</a
+          >
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-divider></mat-divider>
+
+    <mat-paginator
+      fxLayout="row"
+      [length]="totalProjects"
+      [pageSize]="projectsPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangedPage($event)"
+      *ngIf="projects.length > 0"
+    ></mat-paginator>
+  </ng-container>
+
+  <ng-template #noProjects>
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ "PROJECTS.NO_PROJECT_TITLE" | translate }}
+        </h5>
+        <p class="card-text">{{ "PROJECTS.NO_PROJECT_TEXT" | translate }}</p>
         <a
-          style="cursor:pointer;"
-          class="card-link text-primary "
-          [routerLink]="[project._id, 'edit']"
+          href="#"
+          class="btn btn-primary"
+          routerLink="new"
           routerLinkActive="active"
-          >{{ "PROJECTS.EDIT" | translate }}</a
         >
-        <a
-          style="cursor:pointer;"
-          class="card-link text-danger "
-          (click)="onDelete(project._id)"
-        >
-          {{ "PROJECTS.DELETE" | translate }}</a
-        >
-          </mat-action-row>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <mat-divider></mat-divider>
-
-  <mat-paginator
-    fxLayout="row"
-    [length]="totalProjects"
-    [pageSize]="projectsPerPage"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="onChangedPage($event)"
-    *ngIf="projects.length > 0"
-  ></mat-paginator>
-</ng-container>
-
-<ng-template #noProjects>
-  <div class="card text-center">
-    <div class="card-body">
-      <h5 class="card-title">{{ "PROJECTS.NO_PROJECT_TITLE" | translate }}</h5>
-      <p class="card-text">{{ "PROJECTS.NO_PROJECT_TEXT" | translate }}</p>
-      <a
-        href="#"
-        class="btn btn-primary"
-        routerLink="new"
-        routerLinkActive="active"
-      >
-        {{ "PROJECTS.ADD_PROJECT" | translate }}
-      </a>
+          {{ "PROJECTS.ADD_PROJECT" | translate }}
+        </a>
+      </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
 </div>

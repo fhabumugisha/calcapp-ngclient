@@ -1,24 +1,25 @@
 
 import { environment } from './../../environments/environment';
-import { Project } from "./project.model";
-import { Router } from "@angular/router";
-import { Injectable } from "@angular/core";
+import { Project } from './project.model';
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse
-} from "@angular/common/http";
-import { map, catchError, tap } from "rxjs/operators";
-import { throwError } from "rxjs";
+} from '@angular/common/http';
+import { map, catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProjectService {
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     })
   };
    baseApiUrl =  environment.apiUrl;
@@ -48,8 +49,8 @@ export class ProjectService {
 
   createProject(project: Project) {
     return this.http
-      .post<{ message: string; projects: any }>(
-        this.baseApiUrl + "/projects",
+      .post<{ message: string; project: any }>(
+        this.baseApiUrl + '/projects',
         project,
         this.httpOptions
       )
@@ -62,7 +63,7 @@ export class ProjectService {
   updateProject(projectId: string, project: Project) {
     return this.http
       .put<{ message: string; project: any }>(
-        this.baseApiUrl + "/projects/" + projectId,
+        this.baseApiUrl + '/projects/' + projectId,
         project,
         this.httpOptions
       )
@@ -75,7 +76,7 @@ export class ProjectService {
   deleteProject(projectId: string) {
     return this.http
       .delete<{ message: string }>(
-        this.baseApiUrl + "/projects/" + projectId
+        this.baseApiUrl + '/projects/' + projectId
       )
       .pipe(
         catchError(this.handleError),
@@ -86,7 +87,7 @@ export class ProjectService {
   getProject(projectId: string) {
     return this.http
       .get<{ message: string; project: any }>(
-        this.baseApiUrl + "/projects/" + projectId
+        this.baseApiUrl + '/projects/' + projectId
       )
       .pipe(
         catchError(this.handleError),
@@ -97,12 +98,15 @@ export class ProjectService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    const errorMessage = "An unknown error occurred!";
+    const errorMessage = {message: '', data: ''};
+    errorMessage.message = 'An unknown error occurred!';
+
     if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
     }
-
-    return throwError(errorRes.error.message);
+    errorMessage.message = errorRes.error.message;
+    errorMessage.data =  errorRes.error.data;
+    return throwError(errorMessage);
   }
 
   categoryTypes = [
@@ -122,7 +126,7 @@ export class ProjectService {
   }
 
   projectTypes =  [
-   
+
     {
       code: 'Budget',
       label: 'Budget'

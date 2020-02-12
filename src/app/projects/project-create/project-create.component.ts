@@ -30,7 +30,7 @@ export class ProjectCreateComponent implements OnInit {
     if (!createProjectForm.valid) {
       return;
     }
-    const project = new Project(null, createProjectForm.value.title, createProjectForm.value.type, createProjectForm.value.description,  0);
+    const project = new Project(createProjectForm.value.title, createProjectForm.value.type, createProjectForm.value.description,  0);
 
     this.projectService.createProject(project).subscribe(
       resData => {
