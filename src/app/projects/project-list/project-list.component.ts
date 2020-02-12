@@ -81,6 +81,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
 
+  generateExcel(project: Project){
+    this.generateService.generateExcel(project);
+  }
+
   copy(project: Project) {
     const newProject = {
       ...project,

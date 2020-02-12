@@ -45,12 +45,18 @@
             (click)="copy(project)"
             routerLinkActive="active"
             >Copy</a>
-          <a
+         <!--  <a
             style="cursor:pointer;"
             class="card-link text-primary "
             (click)="generatePdf(project._id)"
             routerLinkActive="active"
-            >PDF</a>
+            >PDF</a> -->
+            <a
+            style="cursor:pointer;"
+            class="card-link text-primary "
+            (click)="generateExcel(project)"
+            routerLinkActive="active"
+            >Excel</a>
           <a
             style="cursor:pointer;"
             class="card-link text-primary "
