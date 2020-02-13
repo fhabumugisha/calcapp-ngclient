@@ -107,7 +107,7 @@ this.projectService.createProject(newProject).subscribe(
 
       resData => {
        // this.router.navigate(['/projects']);
-        this.projects.push (resData.project);
+        this.projects.unshift  (resData.project);
       },
       errorData => {
         console.log(errorData.message);

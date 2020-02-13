@@ -2,7 +2,9 @@
 
     <h2 class="content-title">  {{ "EDIT_PROJECT.NEW" | translate }}</h2>
 
-      <form  #createProjectForm="ngForm" (ngSubmit)="onSubmit(createProjectForm)" class="example-form mat-card">
+      <form  #createProjectForm="ngForm"
+            (ngSubmit)="onSubmit(createProjectForm)"
+             class="example-form mat-card">
 
           <mat-form-field >
             <input matInput placeholder="Title" name="title" ngModel  required>

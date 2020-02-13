@@ -9,6 +9,7 @@ export class Project {
    public type: string,
    public description: string,
    public totalAmount: number,
+   public createdAt?: string,
    public items?: Item[],
    public categories?: Category[],
    public _id?: string,

@@ -1,4 +1,9 @@
-<mat-spinner *ngIf="isLoading" mx-auto></mat-spinner>
+<div style="flex:  1 1 auto" *ngIf="isLoading">
+  <mat-spinner style="position: relative;
+  margin-left: 50%;
+  margin-right: 50%;"></mat-spinner>
+</div>
+
 <div class="mx-auto" style="padding: 10px;" *ngIf="!isLoading">
   <ng-container *ngIf="projects.length > 0; else noProjects">
     <div style="display: flex; justify-content: space-between;">
