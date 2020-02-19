@@ -57,12 +57,10 @@
         {{ "MENUS.LOGOUT" | translate }}
       </a>
 
-      <mat-form-field >
-        <mat-select value="fr">
-          <mat-option (click)="drawer.toggle();changerLanguage('fr')" value="fr">Français</mat-option>
-          <mat-option  (click)="drawer.toggle();changerLanguage('en')" value="en">Anglais</mat-option>
-        </mat-select>
-      </mat-form-field>
+
+
+      <mat-slide-toggle  [checked]="subExist" (change)="onChange($event)">Push notification</mat-slide-toggle>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="page-wrap">
@@ -118,12 +116,17 @@
         >
           {{ "MENUS.LOGOUT" | translate }}
         </a>
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-select value="fr">
             <mat-option value="fr" (click)="changerLanguage('fr')">Français</mat-option>
             <mat-option value="en" (click)="changerLanguage('en')">Anglais</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+        <!-- <button title="Notification" class="button button-primary" (click)="subscribeToNotifications()">
+          <mat-icon>notifications_active</mat-icon>
+        </button> -->
+        <mat-slide-toggle  [checked]="subExist" (change)="onChange($event)">Push notification</mat-slide-toggle>
+
       </ng-container>
 
     </mat-toolbar>
@@ -135,6 +138,13 @@
     <footer>
 
         <mat-toolbar color="primary">
+          <mat-form-field >
+            <mat-select value="fr">
+              <mat-option (click)="drawer.toggle();changerLanguage('fr')" value="fr">Français</mat-option>
+              <mat-option  (click)="drawer.toggle();changerLanguage('en')" value="en">Anglais</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span class="spacer"></span>
           <span>Made by Fab</span>
           <span class="spacer"></span>
 

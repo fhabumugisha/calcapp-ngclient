@@ -14,19 +14,11 @@ export class AppComponent implements OnInit {
   language: string;
   constructor(
     private authService: AuthService,
-    private translate: TranslateService,
-    private updates: SwUpdate,
-    public snackBar: MatSnackBar,
-  ) {
-    updates.available.subscribe(event => {
-      console.log(event);
-      const snackBarRef  = this.snackBar.open('New version available', 'Update');
-      snackBarRef.onAction().subscribe(() => {
-      console.log('The snack-bar action was triggered!');
-      updates.activateUpdate().then(() => document.location.reload());
-    });
+    private translate: TranslateService
 
-    });
+  ) {
+
+
   }
 
   ngOnInit(): void {

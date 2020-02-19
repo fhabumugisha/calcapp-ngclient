@@ -22,8 +22,10 @@ import {MatSidenavModule,
   MatExpansionModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatMenuModule,MatCardModule,
-  MatProgressSpinnerModule} from '@angular/material';
+  MatMenuModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+   MatSlideToggleModule } from '@angular/material';
 
 
 
@@ -59,7 +61,7 @@ import {MatSidenavModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,MatSlideToggleModule
 
   ],
   exports: [
@@ -90,7 +92,7 @@ import {MatSidenavModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,MatSlideToggleModule
   ]
 })
 export class MaterialModule { }
