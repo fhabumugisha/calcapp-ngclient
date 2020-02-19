@@ -58,15 +58,25 @@ export class MainNavComponent implements OnInit, OnDestroy {
   onChange(ob: MatSlideToggleChange) {
     console.log(ob.checked);
 
-    if(ob.checked){
+    if (ob.checked) {
         this.subscribeToNotifications();
-    }else{
+    } else {
       if (this.swPush.isEnabled) {
-        this.swPush.unsubscribe().then(() => {
-          this.subExist = true;
-          console.log("Unsuscribed to push notifications");
-        })
-        .catch((error) => console.log(error));
+        const subEndpoint  =  this.isSubscriptionPresent();
+        if(subEndpoint){
+          this.pwaService.removePushSubscriber(subEndpoint).subscribe((data) => {
+            this.swPush.unsubscribe().then(() => {
+              this.subExist = true;
+              console.log('Unsuscribed to push notifications');
+            })
+            .catch((error) => console.log(error));
+          },
+          (error) => {
+            console.log(error);
+          });
+        }
+
+
       }
     }
 
@@ -104,19 +114,19 @@ notify() { // our function to be called on click
   );
 }
 
-isSubscriptionPresent(){
+isSubscriptionPresent() {
+  let subEndpoint =  '';
   if (this.swPush.isEnabled) {
-
-
     this.swPush.subscription.pipe(take(1)).subscribe((sub: PushSubscription | null) => {
       if (sub === null) {
         console.log('Not subscribed to push notifications.');
       } else {
-        console.log(sub.endpoint);
         this.subExist = true;
+        subEndpoint =  sub.endpoint;
       }
     });
   }
+  return subEndpoint;
 }
   ngOnDestroy() {
     this.userSub.unsubscribe();

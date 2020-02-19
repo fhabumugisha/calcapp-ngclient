@@ -30,8 +30,8 @@ export class PwaService {
     };
     return this.http.post(this.baseApiUrl + '/api/notifications', subscription);
   }
-  removePushSubscriber(sub: PushSubscription) {
-    return this.http.delete(this.baseApiUrl + '/api/notifications/' + sub.endpoint);
+  removePushSubscriber(subEndpoint: string) {
+    return this.http.delete(this.baseApiUrl + '/api/notifications/' + subEndpoint);
   }
 
 
