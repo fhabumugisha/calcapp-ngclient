@@ -24,11 +24,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
     isAuthenticated = false;
     private userSub: Subscription;
 
+    private swPushSub: Subscription;
+
     readonly VAPID_PUBLIC_KEY = 'BBCLVrc4fofi36hjglFOS0vdnpohmKtBEIKTQCrB6ShQJs3HtoHj4_x3D3KfESxAdlR4PrMpjlwU03Os-quOtoo';
 
    @Output() switchLanguage = new EventEmitter<string>();
 
    subExist = false;
+   subEndpoint =  '';
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authService: AuthService,
@@ -41,6 +44,15 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
     });
+
+    this.swPushSub =  this.swPush.notificationClicks.subscribe(
+      ({action, notification}) => {
+        if (action === 'read') {
+          console.log('Read was chosen');
+        } else {
+          console.log('Close was chosen');
+        }
+      });
 
     this.isSubscriptionPresent();
   }
@@ -55,25 +67,38 @@ export class MainNavComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout();
   }
+
   onChange(ob: MatSlideToggleChange) {
     console.log(ob.checked);
-
     if (ob.checked) {
         this.subscribeToNotifications();
     } else {
       if (this.swPush.isEnabled) {
-        const subEndpoint  =  this.isSubscriptionPresent();
-        if(subEndpoint){
-          this.pwaService.removePushSubscriber(subEndpoint).subscribe((data) => {
+         this.isSubscriptionPresent();
+         console.log(this.subEndpoint);
+         if ( this.subEndpoint) {
+
+          this.pwaService.removePushSubscriber(this.subEndpoint).toPromise()
+          .then(() => {
+            console.log('Unsuscribed to push notifications on Server');
+            return  this.swPush.unsubscribe();
+          }).then(() => {
+            this.subExist = false;
+            console.log('Unsuscribed to push notifications in browser');
+          }).catch(error => {
+            console.log(error);
+          });
+
+         /*  this.pwaService.removePushSubscriber(subEndpoint).subscribe((data) => {
             this.swPush.unsubscribe().then(() => {
-              this.subExist = true;
+              this.subExist = false;
               console.log('Unsuscribed to push notifications');
             })
             .catch((error) => console.log(error));
           },
           (error) => {
             console.log(error);
-          });
+          }); */
         }
 
 
@@ -89,7 +114,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
         serverPublicKey: this.VAPID_PUBLIC_KEY
     })
     .then(sub => {
-      console.log(sub.toJSON());
+
       return this.pwaService.addPushSubscriber(sub.toJSON()).toPromise();
     }).then(() => {
        this.notify();
@@ -115,20 +140,20 @@ notify() { // our function to be called on click
 }
 
 isSubscriptionPresent() {
-  let subEndpoint =  '';
   if (this.swPush.isEnabled) {
     this.swPush.subscription.pipe(take(1)).subscribe((sub: PushSubscription | null) => {
       if (sub === null) {
         console.log('Not subscribed to push notifications.');
       } else {
         this.subExist = true;
-        subEndpoint =  sub.endpoint;
+        this.subEndpoint =  sub.endpoint;
       }
     });
   }
-  return subEndpoint;
+
 }
   ngOnDestroy() {
     this.userSub.unsubscribe();
+    this.swPushSub.unsubscribe();
   }
 }
