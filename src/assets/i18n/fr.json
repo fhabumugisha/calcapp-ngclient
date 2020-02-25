@@ -88,6 +88,8 @@
     "DELETE_CATEGORY": "Supprimer catégorie",
     "AMOUNT" : "Montant",
     "TOTAL_AMOUNT" : "Montant total",
+    "TOTAL_AMOUNT_EXPENSE" : "Montant total dépenses",
+    "TOTAL_AMOUNT_INCOME" : "Montant total revenues",
     "EDIT_CATEGORY":"Modifier catégorie",
     "TOTAL" : "Total",
     "NEW" : "Nouveau projet"
@@ -103,5 +105,13 @@
   "YES": "Oui, supprimer ",
   "MESSAGE" : "Etes vous sûr de vouloir supprimer cet élément ? "
 
+},
+"EXCEL" : {
+  "CATEGORY" : "Catégorie",
+  "TITLE": "Titre",
+  "AMOUNT" : "Montant",
+  "TOTAL_AMOUNT" : "Montant total",
+  "PROJECT_DATA": "Eléments du projet",
+  "COPYRIGHT": "Cette feuille d'excel a été généré par Calcapp.io."
 }
 }

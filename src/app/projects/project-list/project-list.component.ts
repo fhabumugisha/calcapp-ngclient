@@ -14,6 +14,7 @@ import {
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/error/error-dialog/error-dialog.component';
 import { GenerateService } from '../generate.service';
+import { Category } from '../category.model';
 
 @Component({
   selector: 'app-project-list',
@@ -81,7 +82,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
 
-  generateExcel(project: Project){
+  generateExcel(project: Project) {
     this.generateService.generateExcel(project);
   }
 
@@ -103,7 +104,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
     console.log(newProject);
 
-this.projectService.createProject(newProject).subscribe(
+    this.projectService.createProject(newProject).subscribe(
 
       resData => {
        // this.router.navigate(['/projects']);
@@ -157,6 +158,20 @@ onDelete(projectId: string) {
           );
         }
       });
+  }
+
+  getTotalCategoryAmount(project: Project, category: string) {
+    if ( category === 'Income') {
+      const incomes: Category[] =  project.categories.filter( c => c.type === 'Income');
+      let totalAmountIncome = 0;
+      incomes.forEach(c => totalAmountIncome = c.totalAmount + totalAmountIncome);
+      return totalAmountIncome;
+    } else if (category === 'Expenses') {
+      const expenses: Category[]  =  project.categories.filter( c => c.type === 'Expenses');
+      let totalAmountExpenses = 0;
+      expenses.forEach(c => totalAmountExpenses = c.totalAmount + totalAmountExpenses);
+      return totalAmountExpenses;
+    }
   }
 
 ngOnDestroy() {

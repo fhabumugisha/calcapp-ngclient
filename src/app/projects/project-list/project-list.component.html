@@ -37,6 +37,18 @@
           <!--   {{ project.type }} -->
         </mat-panel-description>
         <div class="expansion-content">
+          <div *ngIf="project.type === 'Budget'">
+
+            <span
+            ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT_EXPENSE" | translate }} :</strong>
+            {{ getTotalCategoryAmount(project, 'Expenses')  | currency: "EUR" }}</span
+          >
+          <br>
+          <span
+            ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT_INCOME" | translate }} :</strong>
+            {{ getTotalCategoryAmount(project, 'Income')| currency: "EUR" }}</span
+          >
+          </div>
           <span
             ><strong>{{ "EDIT_PROJECT.TOTAL_AMOUNT" | translate }} :</strong>
             {{ project.totalAmount | currency: "EUR" }}</span

@@ -1,5 +1,7 @@
 <div class="mx-auto" style="padding: 10px;">
   <h2 class="content-title">{{ "EDIT_PROJECT.TITLE" | translate }}</h2>
+
+
   <form
     *ngIf="projectForm"
     [formGroup]="projectForm"
@@ -65,9 +67,9 @@
               *ngFor="let item; let indexItem = index; of: itemsControls"
             >
               <div style="display: flex; justify-content: space-between;">
-                <h4>{{ item.value.title }}</h4>
+                <h6>{{ item.value.title }}</h6>
 
-                <h5>{{ item.value.amount | currency: "EUR" }}</h5>
+                <h6>{{ item.value.amount | currency: "EUR" }}</h6>
               </div>
               <mat-card-content>
                 <p>
@@ -110,7 +112,7 @@
 
     <div *ngIf="project.type === 'Budget'">
       <div class="titleActions">
-        <h5>
+        <h5 class="content-title">
           {{ "EDIT_PROJECT.CATEGORIES" | translate }} ({{
             project.categories.length
           }})
@@ -129,9 +131,9 @@
 
       <mat-accordion multi="true">
         <div formArrayName="categories">
+
           <mat-expansion-panel
-            [expanded]="indexOpenedCateg === i"
-            (opened)="setIndexOpenedCateg(i)"
+
             *ngFor="let categoryCtrl of categoriesControls; let i = index"
             [formGroupName]="i"
           >
@@ -175,8 +177,8 @@
               "
             >
               <div style="display: flex; justify-content: space-between;">
-                <h4>{{ item.value.title }}</h4>
-                <h5>{{ item.value.amount | currency: "EUR" }}</h5>
+                <h6>{{ item.value.title }}</h6>
+                <h6>{{ item.value.amount | currency: "EUR" }}</h6>
               </div>
 
               <mat-card-content>

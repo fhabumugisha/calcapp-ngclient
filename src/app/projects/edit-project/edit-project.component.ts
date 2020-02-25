@@ -9,6 +9,7 @@ import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { ErrorDialogComponent } from 'src/app/shared/error/error-dialog/error-dialog.component';
+import { Category } from '../category.model';
 
 @Component({
   selector: 'app-edit-project',
@@ -47,6 +48,13 @@ export class EditProjectComponent implements OnInit {
   }
   get categoriesControls() {
     return (this.projectForm.get('categories') as FormArray).controls;
+  }
+
+  getCategoriesControlsByType(type: string) {
+    const controls  = (this.projectForm.get('categories') as FormArray).controls;
+    const controlsFiltered = controls.filter(ctlr => ctlr.value.type === type);
+    console.log(controlsFiltered);
+    return controlsFiltered;
   }
   get projectTypes() {
     return this.projectService.getProjectTypes();
@@ -104,28 +112,16 @@ export class EditProjectComponent implements OnInit {
       }
     }
     if (this.project.categories) {
-      for (const category of this.project.categories) {
-        const  categoryItems = new FormArray([]);
-        if (category.items) {
-          for (const item of category.items) {
-            categoryItems.push(
-            new FormGroup({
-              title: new FormControl(item.title, Validators.required),
-              amount: new FormControl(item.amount, [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)]),
-              description: new FormControl(item.description),
-            })
-          );
-          }
-        }
-        categoriesControls.push(
-          new FormGroup({
-            title: new FormControl(category.title, Validators.required),
-            type: new FormControl(category.type, Validators.required),
-            items : categoryItems,
-            totalAmount : new FormControl(category.totalAmount),
-            description: new FormControl(category.description),
-          })
-        );
+      const incomes: Category[] =  this.project.categories.filter( c => c.type === 'Income');
+      const expenses: Category[] =  this.project.categories.filter( c => c.type === 'Expenses');
+
+      for (const category of incomes) {
+        buildCategoriesList(category, categoriesControls);
+      }
+
+      for (const category of expenses) {
+        buildCategoriesList(category, categoriesControls);
+
       }
     }
 
@@ -311,4 +307,24 @@ export class EditProjectComponent implements OnInit {
 }
 
 
+
+function buildCategoriesList(category: Category, categoriesControls: FormArray) {
+  const categoryItems = new FormArray([]);
+  if (category.items) {
+    for (const item of category.items) {
+      categoryItems.push(new FormGroup({
+        title: new FormControl(item.title, Validators.required),
+        amount: new FormControl(item.amount, [Validators.required, Validators.pattern(/^\d+\.?\d{0,2}$/)]),
+        description: new FormControl(item.description),
+      }));
+    }
+  }
+  categoriesControls.push(new FormGroup({
+    title: new FormControl(category.title, Validators.required),
+    type: new FormControl(category.type, Validators.required),
+    items: categoryItems,
+    totalAmount: new FormControl(category.totalAmount),
+    description: new FormControl(category.description),
+  }));
+}
 
