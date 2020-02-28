@@ -4,8 +4,8 @@ import {TranslateService} from '@ngx-translate/core';
 @Injectable()
 export class LocaleService {
 
-  private LOCALE_FR = 'fr';
-  private LOCALE_EN = 'en';
+  private LOCALE_FR = 'fr_FR';
+  private LOCALE_EN = 'en-US';
 
   constructor(private translateService: TranslateService) {
   }

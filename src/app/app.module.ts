@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PushNotificationsModule } from "ng-push";
+import { PushNotificationsModule } from 'ng-push';
 
 import { HeaderComponent } from './header/header.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -58,8 +58,11 @@ export function createTranslateLoader(http: HttpClient) {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true
-  }
-
+  },
+  {
+    provide: LOCALE_ID,
+    useValue: 'fr' // 'de' for Germany, 'fr' for France ...
+   }
   ],
   bootstrap: [AppComponent],
   schemas : [CUSTOM_ELEMENTS_SCHEMA ]

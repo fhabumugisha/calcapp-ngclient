@@ -68,8 +68,9 @@ mat-action-row {
   margin-top: 10px;
   }
 
-  mat-card {
+  .mat-card {
     margin-bottom: 10px !important;
+    padding: 15px !important;
   }
 
   .mat-card-content {
