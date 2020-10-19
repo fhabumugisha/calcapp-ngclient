@@ -1,3 +1,4 @@
+import { PwaService } from './shared/pwa.service';
 import { AuthService } from './auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
   private LOCALE_EN = 'en-US';
   constructor(
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private pwa: PwaService
 
   ) {
 
