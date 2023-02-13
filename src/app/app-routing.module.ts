@@ -24,10 +24,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-     preloadingStrategy: PreloadAllModules,
-      useHash: true,
-      onSameUrlNavigation: 'reload'
-    } )],
+    preloadingStrategy: PreloadAllModules,
+    useHash: true,
+    onSameUrlNavigation: 'reload',
+    relativeLinkResolution: 'legacy'
+} )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
